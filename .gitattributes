@@ -15,3 +15,8 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+*.ref  diff=astextplain
+
+# PowerShell
+*.psd1  diff=astextplain
+*.xml   diff=astextplain
