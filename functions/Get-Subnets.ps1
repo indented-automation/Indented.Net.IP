@@ -28,6 +28,7 @@ function Get-Subnets {
   #   Author: Chris Dent
   #
   #   Change log:
+  #     12/12/2015 - Chris Dent - Redesigned.
   #     13/10/2011 - Chris Dent - Created.
 
   [CmdLetBinding(DefaultParameterSetName = 'CIDRNotation')]
@@ -39,8 +40,8 @@ function Get-Subnets {
     [Parameter(Mandatory = $true, Position = 2, ParameterSetName = 'IPAndMask')]
     [String]$SubnetMask,
     
-    [ValidateRange(0, 32)]
-    [UInt32]$SupernetLength
+    [Parameter(Mandatory = $true)]
+    [String]$ChildSubnetMask
   )
 
   process {
@@ -54,36 +55,54 @@ function Get-Subnets {
       $Params.MaskLength = ConvertTo-MaskLength $Params.SubnetMask
     }
     
-    if (-not $myinvocation.BoundParameters.ContainsKey("SupernetLength")) {
-      $SupernetLength = switch -regex (ConvertTo-BinaryIP $Params.IPAddress) {
-        "^110"  { 24 }
-        "^10"   { 16 }
-        "^0"    { 8 }
-        default { 24 }
+    if ([IPAddress]::TryParse($ChildSubnetMask, [Ref]$null)) {
+      try {
+        $ChildSubnetMaskLength = ConvertTo-MaskLength $ChildSubnetMask -ErrorAction Stop
+      } catch {
+        $pscmdlet.ThrowTerminatingError($_)
+      }
+    } else {
+      $ChildSubnetMaskLength = 0
+      if ($ChildSubnetMask -match '^\d+$' -and [Int]::Parse($ChildSubnetMask, [Ref]$ChildSubnetMaskLength)) {
+       
+      } else {
+        $pscmdlet.ThrowTerminatingError((
+          New-Object System.Management.Automation.ErrorRecord(
+            (New-Object System.InvalidArgumentException 'Invalid subnet mask value.'),
+            'InvalidMaskValue,Indented.Net.IP\Get-Subnets',
+            [System.Management.Automation.ErrorCategory]::InvalidArgument,
+            $ChildSubnetMask
+          )
+        ))
       }
     }
     
-    if ($SupernetLength -gt $Params.MaskLength) {
-      Write-Error "Subnet is larger than supernet. Aborting"
-      return
+    if ($ChildSubnetMask -gt $Params.MaskLength) {
+      New-Object System.Management.Automation.ErrorRecord(
+        (New-Object System.InvalidArgumentException 'The subnet mask is larger than the mask of the parent network.'),
+        'MaskTooLarge,Indented.Net.IP\Get-Subnets',
+        [System.Management.Automation.ErrorCategory]::InvalidArgument,
+        $ChildSubnetMask
+      )
     }
 
-    $NumberOfNets = [Math]::Pow(2, ($Params.MaskLength - $SupernetLength))
-    $NumberOfAddresses = [Math]::Pow(2, (32 - $Params.MaskLength))
+    $NumberOfNets = [Math]::Pow(2, ($Params.MaskLength - $ChildSubnetMaskLength))
+    $NumberOfAddresses = [Math]::Pow(2, (32 - $ChildSubnetMaskLength))
 
-    $DecimalAddress = ConvertTo-DecimalIP (Get-NetworkAddress "$($Params.IPAddress)/$SupernetLength")
+    # Get the start address
+    $DecimalAddress = ConvertTo-DecimalIP (Get-NetworkAddress $Params.NetworkAddress $Params.SubnetMask)
     for ($i = 0; $i -lt $NumberOfNets; $i++) {
       $NetworkAddress = ConvertTo-DottedDecimalIP $DecimalAddress 
 
       $Subnet = New-Object PsObject -Property ([Ordered]@{
         NetworkAddress   = $NetworkAddress;
-        BroadcastAddress = (Get-BroadcastAddress $NetworkAddress $Params.SubnetMask);
-        SubnetMask       = $Params.SubnetMask;
-        SubnetLength     = $Params.MaskLength;
+        BroadcastAddress = (Get-BroadcastAddress "$NetworkAddress\$ChildSubnetMaskLength");
+        SubnetMask       = $Params.SubnetMask
+        SubnetLength     = $Params.MaskLength
         HostAddresses    = $(
           $NumberOfHosts = $NumberOfAddresses - 2
           if ($NumberOfHosts -lt 0) { 0 } else { $NumberOfHosts }
-        );
+        )
       })
       $Subnet.PsObject.TypeNames.Add("Indented.NetworkTools.Subnet")
       

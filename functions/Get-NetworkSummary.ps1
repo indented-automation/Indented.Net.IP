@@ -11,7 +11,7 @@ function Get-NetworkSummary {
   #   System.Net.IPAddress
   #   System.String
   # .OUTPUTS
-  #   System.Object
+  #   Indented.Net.IP.NetSummary (System.Management.Automation.PSObject)
   # .EXAMPLE
   #   Get-NetworkSummary 192.168.0.1 255.255.255.0
   # .EXAMPLE
@@ -25,6 +25,7 @@ function Get-NetworkSummary {
   #     25/11/2010 - Chris Dent - Created.
 
   [CmdLetBinding(DefaultParameterSetName = 'CIDRNotation')]
+  [OutputType([System.Management.Automation.PSObject])]
   param(
     [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true, ParameterSetName = 'CIDRNotation')]
     [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'IPAndMask')]
@@ -56,13 +57,15 @@ function Get-NetworkSummary {
       Mask              = $Params.SubnetMask;
       MaskLength        = (ConvertTo-MaskLength $Params.SubnetMask);
       MaskHexadecimal   = (ConvertTo-HexIP $Params.SubnetMask);
+      CIDRNotation      = ""
       HostRange         = "";
       NumberOfAddresses = ($DecimalBroadcast - $DecimalNetwork + 1)
       NumberOfHosts     = ($DecimalBroadcast - $DecimalNetwork - 1);
       Class             = "";
       IsPrivate         = $false
-    })
-    $NetworkSummary.PsObject.TypeNames.Add("Indented.NetworkTools.NetworkSummary")
+    }) | Add-Member -TypeName 'Indented.Net.IP.NetSummary' -PassThru
+
+    $NetworkSummary.CIDRNotation = '{0}/{1}' -f $NetworkSummary.NetworkAddress, $NetworkSummary.MaskLength
 
     if ($NetworkSummary.NumberOfHosts -lt 0) {
       $NetworkSummary.NumberOfHosts = 0

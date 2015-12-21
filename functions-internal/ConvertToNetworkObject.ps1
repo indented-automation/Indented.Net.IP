@@ -5,8 +5,6 @@ function ConvertToNetworkObject {
   #   Internal use only.
   #
   #   ConvertToNetworkObject ensures consistent values are recorded from parameters which must handle differing addressing formats. This CmdLet allows all other the other functions in this module to offload parameter handling.
-  #
-  #   Note: the functionality of this CmdLet is deliberately limited. Part of the reason this module exists is to demostrate (in small pieces) IP maths, if all of it is loaded into this hidden function it defeats the point.
   # .PARAMETER IPAddress
   #   Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
   # .PARAMETER SubnetMask
@@ -21,7 +19,7 @@ function ConvertToNetworkObject {
   #   Change log:
   #     14/01/2014 - Chris Dent - Created.
   
-  [CmdLetBinding(DefaultParameterSetName = 'CIDRNotation')]
+  [CmdletBinding(DefaultParameterSetName = 'CIDRNotation')]
   param(
     [Parameter(Mandatory = $true, Position = 1, ValueFromPipeLine = $true, ParameterSetName = 'CIDRNotation')]
     [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'IPAndMask')]
@@ -31,26 +29,43 @@ function ConvertToNetworkObject {
     [String]$SubnetMask
   )
  
-  $NetworkObject = New-Object PsObject -Property ([Ordered]@{
-    IPAddress  = $null;
-    SubnetMask = $null;
-    MaskLength = [Byte]0;
-    State      = "No error";
-  })
-  $NetworkObject.PsObject.TypeNames.Add("Indented.Net.NetworkObject")
+  $NetworkObject = [PSCustomObject]@{
+    IPAddress  = $null
+    SubnetMask = $null
+    MaskLength = $null
+    State      = "No error"
+  }) | Add-Member -TypeName 'Indented.Net.IP.Network' -PassThru
   
   # A bit of cleaning
   $IPAddress = $IPAddress.Trim()
   $SubnetMask = $SubnetMask.Trim()
   
-  # Handling for IP and Mask as a single string
-  if ($IPAddress -match '^(\S+)\s(\S+)$') {
-    # Send it back into this function sort out the values now.
-    return ConvertToNetworkObject $matches[1] $matches[2]
+  # Handler for CIDR notation and IP and mask in a single string
+  if ($IPAddress.IndexOf('\') -gt -1 -or $IPAddress.IndexOf('\') -gt -1) {
+    $NetworkObject.IPAddress, $NetworkObject.MaskLength = $IPAddress.Split('\/')
+  } elseif ($IPAddress.IndexOf(' ') -gt -1) {
+    $NetworkObject.IPAddress, $NetworkObject.SubnetMask = $IPAddress.Split(' ')
+  } else {
+    $NetworkObject.IPAddress = $IPAddress
   }
-  
+
+  if ($NetworkObject.MaskLength -ne $null) {
+    $MaskLength = 0
+    if ([Int]::TryParse($NetworkObject.MaskLength, [Ref]$MaskLength)) {
+     $NetworkObject.MaskLength = $MaskLength
+    } else {
+      
+    }
+  } elseif ($NetworkObject.SubnetMask -ne $null) {
+    $NetworkObject.MaskLength = ''
+  } elseif ($NetworkObject.MaskLength -eq $null -and $NetworkObject.SubnetMask -eq $null) {
+    $NetworkObject.MaskLength = 32
+    $NetworkObject.SubnetMask = [IPAddress]"255.255.255.255" 
+  }
+
+  # Verify the state of the IP address
+
   # IPAddress handling
-  
   $IPAddressTest = New-Object IPAddress 0
   if ([IPAddress]::TryParse($IPAddress, [Ref]$IPAddressTest)) {
     if ($IPAddressTest.AddressFamily -eq [Net.Sockets.AddressFamily]::InterNetwork) {
@@ -58,9 +73,12 @@ function ConvertToNetworkObject {
     } else {
       $NetworkObject.State = "Unexpected IPv6 address for IPAddress."
     }
-  } elseif ($myinvocation.BoundParameters.ContainsKey("SubnetMask")) {
+  } elseif ($psboundparameters.ContainsKey('SubnetMask')) {
     $NetworkObject.State = "Invalid IP address format."
   } else {
+    
+    
+    
     # Begin string parsing
     if ($IPAddress -match '^(?<IPAddress>(?:[0-9]{1,2}|[0-1][0-9]{2}|2[0-4][0-9]|25[0-5])(?:\.(?:[0-9]{1,2}|[0-1][0-9]{2}|2[0-4][0-9]|25[0-5])){0,3})[\\/](?<SubnetMask>\d+)$') {
       # Fix up the IP address
@@ -84,7 +102,7 @@ function ConvertToNetworkObject {
 
   # SubnetMask handling  
   
-  # Validation cannot be (easily) done using a regular expression. Hard-coding this as a string comparison should be nice and fast.
+  # Validation cannot be (easily) done using a regular expression. Hard-coding this as a string comparison should be fast.
   # These can be dynamically generated as follows:
   #
   #   1..32 | ForEach-Object { ConvertTo-Mask $_ }
