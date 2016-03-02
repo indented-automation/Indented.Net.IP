@@ -1,61 +1,66 @@
 function ConvertToNetworkObject {
-  # .SYNOPSIS
-  #   Converts IP address formats to a set a known styles.
-  # .DESCRIPTION
-  #   Internal use only.
-  #
-  #   ConvertToNetworkObject ensures consistent values are recorded from parameters which must handle differing addressing formats. This CmdLet allows all other the other functions in this module to offload parameter handling.
-  # .PARAMETER IPAddress
-  #   Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-  # .PARAMETER SubnetMask
-  #   A subnet mask as an IP address.
-  # .INPUTS
-  #   System.String
-  # .OUTPUTS
-  #   Indented.Net.NetworkObject
-  # .NOTES
-  #   Author: Chris Dent
-  #
-  #   Change log:
-  #     14/01/2014 - Chris Dent - Created.
+    # .SYNOPSIS
+    #   Converts IP address formats to a set a known styles.
+    # .DESCRIPTION
+    #   Internal use only.
+    #
+    #   ConvertToNetworkObject ensures consistent values are recorded from parameters which must handle differing addressing formats. This CmdLet allows all other the other functions in this module to offload parameter handling.
+    # .PARAMETER IPAddress
+    #   Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
+    # .PARAMETER SubnetMask
+    #   A subnet mask as an IP address.
+    # .INPUTS
+    #   System.String
+    # .OUTPUTS
+    #   Indented.Net.NetworkObject
+    # .NOTES
+    #   Author: Chris Dent
+    #
+    #   Change log:
+    #     14/01/2014 - Chris Dent - Created.
   
-  [CmdletBinding(DefaultParameterSetName = 'CIDRNotation')]
-  param(
-    [Parameter(Mandatory = $true, Position = 1, ValueFromPipeLine = $true, ParameterSetName = 'CIDRNotation')]
-    [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'IPAndMask')]
-    [String]$IPAddress,
-    
-    [Parameter(Mandatory = $true, Position = 2, ParameterSetName = 'IPAndMask')]
-    [String]$SubnetMask
-  )
- 
-  $NetworkObject = [PSCustomObject]@{
-    IPAddress  = $null
-    SubnetMask = $null
-    MaskLength = $null
-    State      = "No error"
-  }) | Add-Member -TypeName 'Indented.Net.IP.Network' -PassThru
-  
-  # A bit of cleaning
-  $IPAddress = $IPAddress.Trim()
-  $SubnetMask = $SubnetMask.Trim()
-  
-  # Handler for CIDR notation and IP and mask in a single string
-  if ($IPAddress.IndexOf('\') -gt -1 -or $IPAddress.IndexOf('\') -gt -1) {
-    $NetworkObject.IPAddress, $NetworkObject.MaskLength = $IPAddress.Split('\/')
-  } elseif ($IPAddress.IndexOf(' ') -gt -1) {
-    $NetworkObject.IPAddress, $NetworkObject.SubnetMask = $IPAddress.Split(' ')
-  } else {
-    $NetworkObject.IPAddress = $IPAddress
-  }
+    [CmdletBinding(DefaultParameterSetName = 'CIDRNotation')]
+    param(
+        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeLine = $true, ParameterSetName = 'CIDRNotation')]
+        [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'IPAndMask')]
+        [String]$IPAddress,
 
-  if ($NetworkObject.MaskLength -ne $null) {
-    $MaskLength = 0
-    if ([Int]::TryParse($NetworkObject.MaskLength, [Ref]$MaskLength)) {
-     $NetworkObject.MaskLength = $MaskLength
-    } else {
-      
+        [Parameter(Mandatory = $true, Position = 2, ParameterSetName = 'IPAndMask')]
+        [String]$SubnetMask
+    )
+ 
+    $NetworkObject = [PSCustomObject]@{
+        IPAddress  = $null
+        SubnetMask = $null
+        MaskLength = $null
+        State      = "No error"
+    }) | Add-Member -TypeName 'Indented.Net.IP.Network' -PassThru
+  
+    $IPAddress = $IPAddress.Trim()
+    if ($SubnetMask) {
+        $SubnetMask = $SubnetMask.Trim()
     }
+  
+    # Handler for CIDR notation and IP and mask in a single string
+    if ($IPAddress.IndexOf('\') -gt -1 -or $IPAddress.IndexOf('\') -gt -1) {
+        $NetworkObject.IPAddress, $NetworkObject.MaskLength = $IPAddress.Split('\/')
+    } elseif ($IPAddress.IndexOf(' ') -gt -1) {
+        $NetworkObject.IPAddress, $NetworkObject.SubnetMask = $IPAddress.Split(' ')
+    } else {
+        $NetworkObject.IPAddress = $IPAddress
+    }
+
+    if ($NetworkObject.MaskLength -ne $null) {
+        $MaskLength = 0
+        if ([Int]::TryParse($NetworkObject.MaskLength, [Ref]$MaskLength)) {
+            $NetworkObject.MaskLength = $MaskLength
+        } else {
+            $ErrorRecord = New-Object System.Management.Automation.ErrorRecord(
+                
+            
+            )
+            $pscmdlet.ThrowTerminatingError($ErrorRecord)
+        }
   } elseif ($NetworkObject.SubnetMask -ne $null) {
     $NetworkObject.MaskLength = ''
   } elseif ($NetworkObject.MaskLength -eq $null -and $NetworkObject.SubnetMask -eq $null) {
@@ -76,6 +81,10 @@ function ConvertToNetworkObject {
   } elseif ($psboundparameters.ContainsKey('SubnetMask')) {
     $NetworkObject.State = "Invalid IP address format."
   } else {
+    
+    
+    
+    
     
     
     
