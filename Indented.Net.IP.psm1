@@ -7,16 +7,16 @@
 #   02/04/2015 - Chris Dent - Refactored.
 #   05/07/2012 - Chris Dent - Created.
 
-# Internal functions
-[Array]$Internal = 'ConvertToNetworkObject'
+# Internal
 
-if ($Internal.Count -ge 1) {
-  $Internal | ForEach-Object {
-    Import-Module "$psscriptroot\functions-internal\$_.ps1"
-  }
+[Array]$Internal = 'ConvertToNetwork'
+
+$Internal | ForEach-Object {
+    . "$psscriptroot\functions-internal\$_.ps1"
 }
 
-# Public functions
+# Public
+
 [Array]$Public = 'ConvertFrom-HexIP',
                  'ConvertTo-BinaryIP',
                  'ConvertTo-DecimalIP',
@@ -32,8 +32,6 @@ if ($Internal.Count -ge 1) {
                  'Get-Subnets',
                  'Test-SubnetMember'
 
-if ($Public.Count -ge 1) {
-  $Public | ForEach-Object {
-    Import-Module "$psscriptroot\functions\$_.ps1"
-  }
+$Public | ForEach-Object {
+    . "$psscriptroot\functions\$_.ps1"
 }

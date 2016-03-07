@@ -21,7 +21,7 @@
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>SubnetLength</Label>
+            <Label>MaskLength</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -42,7 +42,7 @@
                 <PropertyName>SubnetMask</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>SubnetLength</PropertyName>
+                <PropertyName>MaskLength</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>HostAddresses</PropertyName>
