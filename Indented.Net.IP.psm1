@@ -29,7 +29,7 @@ $Internal | ForEach-Object {
                  'Get-NetworkAddress',
                  'Get-NetworkRange',
                  'Get-NetworkSummary',
-                 'Get-Subnets',
+                 'Get-Subnet',
                  'Test-SubnetMember'
 
 $Public | ForEach-Object {

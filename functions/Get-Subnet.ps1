@@ -1,4 +1,4 @@
-function Get-Subnets {
+function Get-Subnet {
     # .SYNOPSIS
     #   Get a list of subnets of a given size within a defined supernet.
     # .DESCRIPTION
@@ -14,11 +14,11 @@ function Get-Subnets {
     # .OUTPUTS
     #   Indented.Net.IP.Subnet
     # .EXAMPLE
-    #   Get-Subnets 10.0.0.0 255.255.255.0 -NewSubnetMask 255.255.255.192
+    #   Get-Subnet 10.0.0.0 255.255.255.0 -NewSubnetMask 255.255.255.192
     #   
     #   Four /26 networks are returned.
     # .EXAMPLE
-    #   Get-Subnets 0/22 -NewSubnetMask 24
+    #   Get-Subnet 0/22 -NewSubnetMask 24
     #
     #   64 /24 networks are returned.
     # .NOTES

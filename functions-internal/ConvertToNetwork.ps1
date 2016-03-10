@@ -77,7 +77,7 @@ function ConvertToNetwork {
     
     # SubnetMask
     
-    if ($SubnetMask -eq $null -or $SubnetMask -eq '') {
+    if ($null -eq $SubnetMask -or $SubnetMask -eq '') {
         $Network.SubnetMask = [IPAddress]$Script:ValidSubnetMaskValues[32]
         $Network.MaskLength = 32 
     } else {
