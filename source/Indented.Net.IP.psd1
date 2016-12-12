@@ -12,7 +12,7 @@
 RootModule = 'Indented.Net.IP.psm1'
 
 # Version number of this module.
-ModuleVersion = '5.0.8'
+ModuleVersion = '5.0.12'
 
 # ID used to uniquely identify this module
 GUID = 'da36f971-e698-46c7-bffc-5d2d35a6f505'
@@ -92,7 +92,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('IP maths', 'IP calculator', 'Subnet maths')
+        Tags = @('IPMaths', 'IPCalculator', 'SubnetMaths')
 
         # A URL to the license for this module.
         # LicenseUri = ''
