@@ -7,6 +7,8 @@ function Get-NetworkRange {
     #   Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
     # .PARAMETER SubnetMask
     #   A subnet mask as an IP address.
+    # .PARAMETER IncludeNetworkAndBroadcast
+    #   Include the network and broadcast addresses when generating a network address range.
     # .INPUTS
     #   System.Net.IPAddress
     #   System.String

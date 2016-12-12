@@ -3,7 +3,7 @@ function Get-Subnet {
     #   Get a list of subnets of a given size within a defined supernet.
     # .DESCRIPTION
     #   Generates a list of subnets for a given network range using either the address class or a user-specified value.
-    # .PARAMETER NetworkAddress
+    # .PARAMETER IPAddress
     #   Any address in the super-net range. Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
     # .PARAMETER SubnetMask
     #   The subnet mask of the network to split. Mandatory if the subnet mask is not included in the IPAddress parameter.

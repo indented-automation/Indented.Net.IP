@@ -3,10 +3,14 @@ function ConvertTo-Subnet {
     #   Convert a start and end IP address to the closest matching subnet.
     # .DESCRIPTION
     #   ConvertTo-Subnet attempts to convert a starting and ending IP address from a range to the closest subnet.
-    # .PARAMETER Start
-    #   The first IP address from a range.
     # .PARAMETER End
     #   The last IP address from a range.
+    # .PARAMETER IPAddress
+    #    Any IP address in the subnet.
+    # .PARAMETER Start
+    #   The first IP address from a range.
+    # .PARAMETER SubnetMask
+    #    A subnet mask.
     # .INPUTS
     #   System.Net.IPAddress
     # .OUTPUTS
