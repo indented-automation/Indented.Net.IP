@@ -1,0 +1,54 @@
+"File","Line","Function","Command"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","34","ConvertToNetwork","$Script:ValidSubnetMaskValues =
+            ""0.0.0.0"", ""128.0.0.0"", ""192.0.0.0"",
+            ""224.0.0.0"", ""240.0.0.0"", ""248.0.0.0"", ""252.0.0.0"",
+            ""254.0.0.0"", ""255.0.0.0"", ""255.128.0.0"", ""255.192.0.0"",
+            ""255.224.0.0"", ""255.240.0.0"", ""255.248.0.0"", ""255.252.0.0"",
+            ""255.254.0.0"", ""255.255.0.0"", ""255.255.128.0"", ""255.255.192.0"",
+            ""255.255.224.0"", ""255.255.240.0"", ""255.255.248.0"", ""255.255.252.0"",
+            ""255.255.254.0"", ""255.255.255.0"", ""255.255.255.128"", ""255.255.255.192"",
+            ""255.255.255.224"", ""255.255.255.240"", ""255.255.255.248"", ""255.255.255.252"",
+            ""255.255.255.254"", ""255.255.255.255"""
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","90","ConvertToNetwork","$ErrorRecord = New-Object System.Management.Automation.ErrorRecord(
+                    (New-Object ArgumentException 'Mask length out of range (expecting 0 to 32).'),
+                    'InvalidMaskLength',
+                    [System.Management.Automation.ErrorCategory]::InvalidArgument,
+                    $SubnetMask
+                )"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","91","ConvertToNetwork","(New-Object ArgumentException 'Mask length out of range (expecting 0 to 32).'),
+                    'InvalidMaskLength',
+                    [System.Management.Automation.ErrorCategory]::InvalidArgument,
+                    $SubnetMask"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","91","ConvertToNetwork","New-Object ArgumentException 'Mask length out of range (expecting 0 to 32).'"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","96","ConvertToNetwork","throw $ErrorRecord"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","100","ConvertToNetwork","$SubnetMask += '.0'"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","108","ConvertToNetwork","$ErrorRecord = New-Object System.Management.Automation.ErrorRecord(
+                    (New-Object ArgumentException 'Invalid subnet mask.'),
+                    'InvalidSubnetMask',
+                    [System.Management.Automation.ErrorCategory]::InvalidArgument,
+                    $SubnetMask
+                )"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","109","ConvertToNetwork","(New-Object ArgumentException 'Invalid subnet mask.'),
+                    'InvalidSubnetMask',
+                    [System.Management.Automation.ErrorCategory]::InvalidArgument,
+                    $SubnetMask"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","109","ConvertToNetwork","New-Object ArgumentException 'Invalid subnet mask.'"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","114","ConvertToNetwork","throw $ErrorRecord"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","481","ConvertTo-Subnet","$pscmdlet.ThrowTerminatingError($_)"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","485","ConvertTo-Subnet","$MaskLength = 32"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","506","ConvertTo-Subnet","$pscmdlet.ThrowTerminatingError($_)"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","771","Get-NetworkSummary","$NetworkSummary.NumberOfHosts = 0"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","839","Get-Subnet","throw $_"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","845","Get-Subnet","throw $_"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","849","Get-Subnet","$ErrorRecord = New-Object System.Management.Automation.ErrorRecord(
+            (New-Object ArgumentException 'The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.'),
+            'NewSubnetMaskTooShort',
+            [System.Management.Automation.ErrorCategory]::InvalidArgument,
+            $NewNetwork.MaskLength
+        )"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","850","Get-Subnet","(New-Object ArgumentException 'The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.'),
+            'NewSubnetMaskTooShort',
+            [System.Management.Automation.ErrorCategory]::InvalidArgument,
+            $NewNetwork.MaskLength"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","850","Get-Subnet","New-Object ArgumentException 'The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.'"
+"C:\Development\Indented.Net.IP\6.0.0.0\Indented.Net.IP.psm1","855","Get-Subnet","throw $ErrorRecord"

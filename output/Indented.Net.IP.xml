@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="105" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2017-04-14" time="16:16:38">
+  <environment user="Chris" machine-name="TITAN" cwd="C:\Development\Indented.Net.IP" user-domain="TITAN" platform="Microsoft Windows 10 Pro|C:\WINDOWS|\Device\Harddisk0\Partition2" nunit-version="2.5.8.0" os-version="10.0.14393" clr-version="4.0.30319.42000" />
+  <culture-info current-culture="en-GB" current-uiculture="en-GB" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="7.4516" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertFrom-HexIP.tests.ps1" executed="True" result="Success" success="True" time="0.8951" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertFrom-HexIP.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertFrom-HexIP" executed="True" result="Success" success="True" time="0.8951" asserts="0" description="ConvertFrom-HexIP">
+            <results>
+              <test-case description="Returns an IPAddress" name="ConvertFrom-HexIP.Returns an IPAddress" time="0.7" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 30201000 to 48.32.16.0" name="ConvertFrom-HexIP.Converts 30201000 to 48.32.16.0" time="0.0336" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 00000000 to 0.0.0.0" name="ConvertFrom-HexIP.Converts 00000000 to 0.0.0.0" time="0.0245" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts FFFFFFFF to 255.255.255.255" name="ConvertFrom-HexIP.Converts FFFFFFFF to 255.255.255.255" time="0.0218" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts &quot;0xFFFFFFFF&quot; to 255.255.255.255" name="ConvertFrom-HexIP.Converts &quot;0xFFFFFFFF&quot; to 255.255.255.255" time="0.033" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertFrom-HexIP.Accepts pipeline input" time="0.0244" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if the input format is not valid" name="ConvertFrom-HexIP.Throws an error if the input format is not valid" time="0.0237" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertFrom-HexIP.Has valid examples" time="0.0342" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-BinaryIP.tests.ps1" executed="True" result="Success" success="True" time="0.2331" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-BinaryIP.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-BinaryIP" executed="True" result="Success" success="True" time="0.2331" asserts="0" description="ConvertTo-BinaryIP">
+            <results>
+              <test-case description="Returns a string" name="ConvertTo-BinaryIP.Returns a string" time="0.0639" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 1.2.3.4 to 00000001.00000010.00000011.00000100" name="ConvertTo-BinaryIP.Converts 1.2.3.4 to 00000001.00000010.00000011.00000100" time="0.0221" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 129.129.129.129 to 10000001.10000001.10000001.10000001" name="ConvertTo-BinaryIP.Converts 129.129.129.129 to 10000001.10000001.10000001.10000001" time="0.0216" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 255.255.255.255 to 11111111.11111111.11111111.11111111" name="ConvertTo-BinaryIP.Converts 255.255.255.255 to 11111111.11111111.11111111.11111111" time="0.0221" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 0.0.0.0 to 00000000.00000000.00000000.00000000" name="ConvertTo-BinaryIP.Converts 0.0.0.0 to 00000000.00000000.00000000.00000000" time="0.022" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-BinaryIP.Accepts pipeline input" time="0.0215" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="ConvertTo-BinaryIP.Throws an error if passed something other than an IPAddress" time="0.024" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-BinaryIP.Has valid examples" time="0.0359" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-DecimalIP.tests.ps1" executed="True" result="Success" success="True" time="0.1402" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-DecimalIP.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-DecimalIP" executed="True" result="Success" success="True" time="0.1402" asserts="0" description="ConvertTo-DecimalIP">
+            <results>
+              <test-case description="Returns a unsigned 32-bit integer" name="ConvertTo-DecimalIP.Returns a unsigned 32-bit integer" time="0.0432" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 0.0.0.0 to 0" name="ConvertTo-DecimalIP.Converts 0.0.0.0 to 0" time="0.0201" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 255.255.255.255 to 4294967295" name="ConvertTo-DecimalIP.Converts 255.255.255.255 to 4294967295" time="0.0176" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-DecimalIP.Accepts pipeline input" time="0.0174" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="ConvertTo-DecimalIP.Throws an error if passed something other than an IPAddress" time="0.0191" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-DecimalIP.Has valid examples" time="0.0229" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-DottedDecimalIP.tests.ps1" executed="True" result="Success" success="True" time="0.1545" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-DottedDecimalIP.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-DottedDecimalIP" executed="True" result="Success" success="True" time="0.1545" asserts="0" description="ConvertTo-DottedDecimalIP">
+            <results>
+              <test-case description="Converts 00000001.00000010.00000011.00000100 to 1.2.3.4" name="ConvertTo-DottedDecimalIP.Converts 00000001.00000010.00000011.00000100 to 1.2.3.4" time="0.0459" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 16909060 to 1.2.3.4" name="ConvertTo-DottedDecimalIP.Converts 16909060 to 1.2.3.4" time="0.0225" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-DottedDecimalIP.Accepts pipeline input" time="0.0318" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed an unrecognised format" name="ConvertTo-DottedDecimalIP.Throws an error if passed an unrecognised format" time="0.0216" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-DottedDecimalIP.Has valid examples" time="0.0327" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-HexIP.tests.ps1" executed="True" result="Success" success="True" time="0.1973" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-HexIP.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-HexIP" executed="True" result="Success" success="True" time="0.1973" asserts="0" description="ConvertTo-HexIP">
+            <results>
+              <test-case description="Returns a string" name="ConvertTo-HexIP.Returns a string" time="0.0413" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 0.0.0.0 to 00000000" name="ConvertTo-HexIP.Converts 0.0.0.0 to 00000000" time="0.0169" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 255.255.255.255 to FFFFFFFF" name="ConvertTo-HexIP.Converts 255.255.255.255 to FFFFFFFF" time="0.0164" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 1.2.3.4 to 01020304" name="ConvertTo-HexIP.Converts 1.2.3.4 to 01020304" time="0.0175" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-HexIP.Accepts pipeline input" time="0.0211" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed an unrecognised format" name="ConvertTo-HexIP.Throws an error if passed an unrecognised format" time="0.036" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-HexIP.Has valid examples" time="0.048" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-Mask.tests.ps1" executed="True" result="Success" success="True" time="0.2054" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-Mask.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-Mask" executed="True" result="Success" success="True" time="0.2054" asserts="0" description="ConvertTo-Mask">
+            <results>
+              <test-case description="Returns an IPAddress" name="ConvertTo-Mask.Returns an IPAddress" time="0.0542" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 0 to 0.0.0.0" name="ConvertTo-Mask.Converts 0 to 0.0.0.0" time="0.0219" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 24 to 255.255.255.0" name="ConvertTo-Mask.Converts 24 to 255.255.255.0" time="0.0194" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 9 to 255.128.0.0" name="ConvertTo-Mask.Converts 9 to 255.128.0.0" time="0.021" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 32 to 255.255.255.255" name="ConvertTo-Mask.Converts 32 to 255.255.255.255" time="0.0227" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-Mask.Accepts pipeline input" time="0.0191" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed an invalid value" name="ConvertTo-Mask.Throws an error if passed an invalid value" time="0.0162" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-Mask.Has valid examples" time="0.0309" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-MaskLength.tests.ps1" executed="True" result="Success" success="True" time="0.165" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-MaskLength.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-MaskLength" executed="True" result="Success" success="True" time="0.165" asserts="0" description="ConvertTo-MaskLength">
+            <results>
+              <test-case description="Returns a 32-bit integer" name="ConvertTo-MaskLength.Returns a 32-bit integer" time="0.0463" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 0.0.0.0 to 0" name="ConvertTo-MaskLength.Converts 0.0.0.0 to 0" time="0.0161" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 255.255.224.0 to " name="ConvertTo-MaskLength.Converts 255.255.224.0 to " time="0.0156" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 255.255.255.255 to 32" name="ConvertTo-MaskLength.Converts 255.255.255.255 to 32" time="0.0158" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="ConvertTo-MaskLength.Accepts pipeline input" time="0.0179" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="ConvertTo-MaskLength.Throws an error if passed something other than an IPAddress" time="0.0234" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-MaskLength.Has valid examples" time="0.0297" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertTo-Subnet.tests.ps1" executed="True" result="Success" success="True" time="0.4337" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertTo-Subnet.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertTo-Subnet" executed="True" result="Success" success="True" time="0.4337" asserts="0" description="ConvertTo-Subnet">
+            <results>
+              <test-case description="Returns a PSObject tagged with the type name Indented.Net.IP.Subnet" name="ConvertTo-Subnet.Returns a PSObject tagged with the type name Indented.Net.IP.Subnet" time="0.1126" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts an address and subnet mask, and a start and end address" name="ConvertTo-Subnet.Accepts an address and subnet mask, and a start and end address" time="0.0536" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Converts 192.168.0.225/23 to a subnet" name="ConvertTo-Subnet.Converts 192.168.0.225/23 to a subnet" time="0.0321" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns the network 10.0.0.0/24 when passed 10.0.0.10 and 10.0.0.250" name="ConvertTo-Subnet.Returns the network 10.0.0.0/24 when passed 10.0.0.10 and 10.0.0.250" time="0.0344" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns the network 0.0.0.0/0 when passed 0.0.0.0 and 255.255.255.255" name="ConvertTo-Subnet.Returns the network 0.0.0.0/0 when passed 0.0.0.0 and 255.255.255.255" time="0.0365" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Swaps start and end and calculates the common subnet if end falls before start" name="ConvertTo-Subnet.Swaps start and end and calculates the common subnet if end falls before start" time="0.0635" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="ConvertTo-Subnet.Has valid examples" time="0.1009" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\ConvertToNetwork.tests.ps1" executed="True" result="Success" success="True" time="0.3836" asserts="0" description="C:\Development\Indented.Net.IP\test\ConvertToNetwork.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="ConvertToNetwork" executed="True" result="Success" success="True" time="0.3836" asserts="0" description="ConvertToNetwork">
+            <results>
+              <test-case description="Translates the string 0/0 to 0.0.0.0/0 (mask 0.0.0.0)" name="ConvertToNetwork.Translates the string 0/0 to 0.0.0.0/0 (mask 0.0.0.0)" time="0.0533" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Translates the string 1.2/27 to 1.2.0.0/27 (mask 255.255.255.224)" name="ConvertToNetwork.Translates the string 1.2/27 to 1.2.0.0/27 (mask 255.255.255.224)" time="0.0189" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Translates a string containing &quot;3.4.5 255.255.0.0&quot; to 3.4.5.0/16 (mask 255.255.0.0)" name="ConvertToNetwork.Translates a string containing &quot;3.4.5 255.255.0.0&quot; to 3.4.5.0/16 (mask 255.255.0.0)" time="0.0212" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Translates IPAddress argument 1.2.3.4 and SubnetMask argument 24 to 1.2.3.4/24 (mask 255.255.255.0)" name="ConvertToNetwork.Translates IPAddress argument 1.2.3.4 and SubnetMask argument 24 to 1.2.3.4/24 (mask 255.255.255.0)" time="0.0217" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Translates IPAddress argument 212.44.56.21 and SubnetMask argument 255.255.128.0 to 212.44.56.21/17" name="ConvertToNetwork.Translates IPAddress argument 212.44.56.21 and SubnetMask argument 255.255.128.0 to 212.44.56.21/17" time="0.0194" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Translates IPAddres argument 1.0.0.0 with no SubnetMask argument to 1.0.0.0/32 (mask 255.255.255.255)" name="ConvertToNetwork.Translates IPAddres argument 1.0.0.0 with no SubnetMask argument to 1.0.0.0/32 (mask 255.255.255.255)" time="0.0228" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Handles all MaskLength values" name="ConvertToNetwork.Handles all MaskLength values" time="0.1134" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Handles all valid subnet mask values" name="ConvertToNetwork.Handles all valid subnet mask values" time="0.1129" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Get-BroadcastAddress.tests.ps1" executed="True" result="Success" success="True" time="0.2649" asserts="0" description="C:\Development\Indented.Net.IP\test\Get-BroadcastAddress.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-BroadcastAddress" executed="True" result="Success" success="True" time="0.2649" asserts="0" description="Get-BroadcastAddress">
+            <results>
+              <test-case description="Returns an IPAddress" name="Get-BroadcastAddress.Returns an IPAddress" time="0.0514" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 0.0.0.0 when passed 0.0.0.0/32" name="Get-BroadcastAddress.Returns 0.0.0.0 when passed 0.0.0.0/32" time="0.0423" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 1.0.0.15 when passwed 1.0.0.0/28" name="Get-BroadcastAddress.Returns 1.0.0.15 when passwed 1.0.0.0/28" time="0.0358" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 255.255.255.255 when passed 0.0.0.0/0" name="Get-BroadcastAddress.Returns 255.255.255.255 when passed 0.0.0.0/0" time="0.0389" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="Get-BroadcastAddress.Accepts pipeline input" time="0.0215" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="Get-BroadcastAddress.Throws an error if passed something other than an IPAddress" time="0.0209" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Get-BroadcastAddress.Has valid examples" time="0.0541" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Get-NetworkAddress.tests.ps1" executed="True" result="Success" success="True" time="0.2668" asserts="0" description="C:\Development\Indented.Net.IP\test\Get-NetworkAddress.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-NetworkAddress" executed="True" result="Success" success="True" time="0.2668" asserts="0" description="Get-NetworkAddress">
+            <results>
+              <test-case description="Returns an IPAddress" name="Get-NetworkAddress.Returns an IPAddress" time="0.0529" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 255.255.255.255 when passed 255.255.255.255/32" name="Get-NetworkAddress.Returns 255.255.255.255 when passed 255.255.255.255/32" time="0.0329" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 1.0.0.15 when passwed 1.0.0.0/28" name="Get-NetworkAddress.Returns 1.0.0.15 when passwed 1.0.0.0/28" time="0.0305" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 0.0.0.0 when passed 0.0.0.0/0" name="Get-NetworkAddress.Returns 0.0.0.0 when passed 0.0.0.0/0" time="0.0394" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="Get-NetworkAddress.Accepts pipeline input" time="0.0245" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="Get-NetworkAddress.Throws an error if passed something other than an IPAddress" time="0.0274" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Get-NetworkAddress.Has valid examples" time="0.0592" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Get-NetworkRange.tests.ps1" executed="True" result="Success" success="True" time="3.098" asserts="0" description="C:\Development\Indented.Net.IP\test\Get-NetworkRange.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-NetworkRange" executed="True" result="Success" success="True" time="3.098" asserts="0" description="Get-NetworkRange">
+            <results>
+              <test-case description="Returns an array of IPAddress" name="Get-NetworkRange.Returns an array of IPAddress" time="0.0513" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns 255.255.255.255 when passed 255.255.255.255/32" name="Get-NetworkRange.Returns 255.255.255.255 when passed 255.255.255.255/32" time="0.0503" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="Get-NetworkRange.Accepts pipeline input" time="0.0208" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="Get-NetworkRange.Throws an error if passed something other than an IPAddress" time="0.0218" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Get-NetworkRange.Has valid examples" time="2.9538" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Get-NetworkSummary.tests.ps1" executed="True" result="Success" success="True" time="0.5126" asserts="0" description="C:\Development\Indented.Net.IP\test\Get-NetworkSummary.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-NetworkSummary" executed="True" result="Success" success="True" time="0.5126" asserts="0" description="Get-NetworkSummary">
+            <results>
+              <test-case description="Returns an object tagged with the type Indented.Net.IP.NetworkSummary" name="Get-NetworkSummary.Returns an object tagged with the type Indented.Net.IP.NetworkSummary" time="0.0569" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies ranges with a first octet from 0 to 127 as class A" name="Get-NetworkSummary.Identifies ranges with a first octet from 0 to 127 as class A" time="0.0386" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies ranges with a first octet from 128 to 191 as class B" name="Get-NetworkSummary.Identifies ranges with a first octet from 128 to 191 as class B" time="0.0377" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies ranges with a first octet of 192 to 223 as class C" name="Get-NetworkSummary.Identifies ranges with a first octet of 192 to 223 as class C" time="0.0366" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies ranges with a first octet of 224 to 239 as class D" name="Get-NetworkSummary.Identifies ranges with a first octet of 224 to 239 as class D" time="0.0406" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies ranges with a first octet of 240 to 255 as class E" name="Get-NetworkSummary.Identifies ranges with a first octet of 240 to 255 as class E" time="0.0403" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies 10/8 as a private range" name="Get-NetworkSummary.Identifies 10/8 as a private range" time="0.0502" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies 172.16/12 as a private range" name="Get-NetworkSummary.Identifies 172.16/12 as a private range" time="0.053" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Identifies 192.168/16 as a private range" name="Get-NetworkSummary.Identifies 192.168/16 as a private range" time="0.0484" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Accepts pipeline input" name="Get-NetworkSummary.Accepts pipeline input" time="0.0276" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress" name="Get-NetworkSummary.Throws an error if passed something other than an IPAddress" time="0.0196" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Get-NetworkSummary.Has valid examples" time="0.063" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Get-Subnet.tests.ps1" executed="True" result="Success" success="True" time="0.3188" asserts="0" description="C:\Development\Indented.Net.IP\test\Get-Subnet.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-Subnet" executed="True" result="Success" success="True" time="0.3188" asserts="0" description="Get-Subnet">
+            <results>
+              <test-case description="Returns an object tagged with the type Indented.Net.IP.Subnet" name="Get-Subnet.Returns an object tagged with the type Indented.Net.IP.Subnet" time="0.0577" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Creates two /26 subnets from 10/25" name="Get-Subnet.Creates two /26 subnets from 10/25" time="0.0408" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Handles both subnet mask and mask length formats for NewSubnetMask" name="Get-Subnet.Handles both subnet mask and mask length formats for NewSubnetMask" time="0.1012" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if requested to subnet a smaller network into a larger one" name="Get-Subnet.Throws an error if requested to subnet a smaller network into a larger one" time="0.0157" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Get-Subnet.Has valid examples" time="0.1035" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="C:\Development\Indented.Net.IP\test\Test-SubnetMember.tests.ps1" executed="True" result="Success" success="True" time="0.1826" asserts="0" description="C:\Development\Indented.Net.IP\test\Test-SubnetMember.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Test-SubnetMember" executed="True" result="Success" success="True" time="0.1826" asserts="0" description="Test-SubnetMember">
+            <results>
+              <test-case description="Returns a Boolean" name="Test-SubnetMember.Returns a Boolean" time="0.054" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns true if the subject falls within the object network" name="Test-SubnetMember.Returns true if the subject falls within the object network" time="0.023" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns false if the subject does fall within the object network" name="Test-SubnetMember.Returns false if the subject does fall within the object network" time="0.027" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws an error if passed something other than an IPAddress for Subject or Object" name="Test-SubnetMember.Throws an error if passed something other than an IPAddress for Subject or Object" time="0.0275" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Has valid examples" name="Test-SubnetMember.Has valid examples" time="0.0511" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
