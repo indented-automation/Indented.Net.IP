@@ -6,6 +6,7 @@ skip_commits:
 build: false
 
 install:
+  - ps: Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
   - ps: Install-Module Configuration, Indented.Build
   - ps: Update-Module Pester
 
