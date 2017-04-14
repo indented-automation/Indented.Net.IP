@@ -1,6 +1,6 @@
-﻿os: WMF 5
+os: WMF 5
 
-version: 1.0.0.{build}
+version: 5.0.{build}.0
 
 skip_commits:
   message: /updated readme.*|update readme.*s/
