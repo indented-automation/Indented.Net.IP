@@ -1,0 +1,16 @@
+﻿os: WMF 5
+
+skip_commits:
+  message: /updated readme.*|update readme.*s/
+
+build: false
+
+install:
+  - ps: Install-Module Configuration, Indented.Build
+  - ps: Update-Module Pester
+
+build_script:
+  - ps: Start-Build -BuildType Build
+
+test_script:
+  - ps: Start-Build -BuildType Test
