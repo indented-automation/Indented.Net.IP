@@ -27,7 +27,7 @@ CompanyName = 'Chris Dent'
 Copyright = '(c) 2016 Chris Dent'
 
 # Description of the functionality provided by this module
-Description = 'IP calculators.'
+Description = 'A collection of commands written to perform IPv4 subnet math.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '4.0'
