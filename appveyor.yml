@@ -12,6 +12,7 @@ install:
       Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
       Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
       Install-Module Configuration, Pester, Indented.Build
+      Get-BuildInfo -BuildType Build
 
 build_script:
   - ps: Start-Build -BuildType Build
