@@ -1,14 +1,17 @@
 ﻿os: WMF 5
 
+version: 1.0.0.0
+
 skip_commits:
   message: /updated readme.*|update readme.*s/
 
 build: false
 
 install:
-  - ps: Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-  - ps: Install-Module Configuration, Indented.Build
-  - ps: Update-Module Pester
+  - ps: >-
+      Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+      Install-Module Configuration, Pester, Indented.Build
 
 build_script:
   - ps: Start-Build -BuildType Build
