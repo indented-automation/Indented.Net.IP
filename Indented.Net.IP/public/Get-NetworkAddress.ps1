@@ -1,37 +1,37 @@
-function Get-NetworkAddress {
-    # .SYNOPSIS
-    #   Get the network address for a network range.
-    # .DESCRIPTION
-    #   Get-NetworkAddress returns the network address for a subnet by performing a bitwise AND operation against the decimal forms of the IP address and subnet mask.
-    # .PARAMETER IPAddress
-    #   Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-    # .PARAMETER SubnetMask
-    #   A subnet mask as an IP address.
-    # .INPUTS
-    #   System.String
-    # .OUTPUTS
-    #   System.Net.IPAddress
-    # .EXAMPLE
-    #   Get-NetworkAddress 192.168.0.243 255.255.255.0
-    #    
-    #   Returns the address 192.168.0.0.
-    # .EXAMPLE
-    #   Get-NetworkAddress 10.0.9/22
-    #   
-    #   Returns the address 10.0.8.0.
-    # .EXAMPLE
-    #   Get-NetworkAddress "10.0.23.21 255.255.255.224"
-    #
-    #   Input values are automatically split into IP address and subnet mask. Returns the address 10.0.23.0.
-    # .NOTES
-    #   Author: Chris Dent
-    #
-    #   Change log:
-    #     06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    #     25/11/2010 - Chris Dent - Created.
+filter Get-NetworkAddress {
+    <#
+    .SYNOPSIS
+        Get the network address for a network range.
+    .DESCRIPTION
+        Get-NetworkAddress returns the network address for a subnet by performing a bitwise AND operation against the decimal forms of the IP address and subnet mask.
+    .PARAMETER IPAddress
+        Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
+    .PARAMETER SubnetMask
+        A subnet mask as an IP address.
+    .INPUTS
+        System.String
+    .EXAMPLE
+        Get-NetworkAddress 192.168.0.243 255.255.255.0
+       
+        Returns the address 192.168.0.0.
+    .EXAMPLE
+        Get-NetworkAddress 10.0.9/22
+        
+        Returns the address 10.0.8.0.
+    .EXAMPLE
+        Get-NetworkAddress "10.0.23.21 255.255.255.224"
+        
+        Input values are automatically split into IP address and subnet mask. Returns the address 10.0.23.0.
+    .NOTES
+        Change log:
+            07/09/2017 - Chris Dent - Converted to filter.
+            06/03/2016 - Chris Dent - Cleaned up code, added tests.
+            25/11/2010 - Chris Dent - Created.
+    #>
     
+    [CmdletBinding()]
     [OutputType([System.Net.IPAddress])]
-    param(
+    param (
         [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
         [String]$IPAddress,
 
@@ -39,13 +39,13 @@ function Get-NetworkAddress {
         [String]$SubnetMask
     )
 
-    process {
-        try {
-            $Network = ConvertToNetwork @psboundparameters
-        } catch {
-            throw $_
-        }
-    
-        return ConvertTo-DottedDecimalIP ((ConvertTo-DecimalIP $Network.IPAddress) -band (ConvertTo-DecimalIP $Network.SubnetMask))
+    try {
+        $Network = ConvertToNetwork @psboundparameters
+        $decimalIP = ConvertTo-DecimalIP $Network.IPAddress
+        $decimalMask = ConvertTo-DecimalIP $Network.SubnetMask
+
+        ConvertTo-DottedDecimalIP ($decimalIP -band $decimalMask)
+    } catch {
+        $pscmdlet.ThrowTerminatingError($_)
     }
 }

@@ -1,0 +1,63 @@
+---
+external help file: Indented.Net.IP-help.xml
+online version: 
+schema: 2.0.0
+---
+
+# ConvertTo-BinaryIP
+
+## SYNOPSIS
+Converts a Decimal IP address into a binary format.
+
+## SYNTAX
+
+```
+ConvertTo-BinaryIP [-IPAddress] <IPAddress>
+```
+
+## DESCRIPTION
+ConvertTo-BinaryIP uses System.Convert to switch between decimal and binary format.
+The output from this function is dotted binary.
+
+## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+```
+ConvertTo-BinaryIP 1.2.3.4
+```
+
+Convert an IP address to a binary format.
+
+## PARAMETERS
+
+### -IPAddress
+An IP Address to convert.
+
+```yaml
+Type: IPAddress
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+## INPUTS
+
+### System.Net.IPAddress
+
+## OUTPUTS
+
+### System.String
+
+## NOTES
+Change log:
+    07/09/2017 - Chris Dent - Converted to filter.
+    06/03/2016 - Chris Dent - Cleaned up code, added tests.
+    25/11/2010 - Chris Dent - Created.
+
+## RELATED LINKS
+
