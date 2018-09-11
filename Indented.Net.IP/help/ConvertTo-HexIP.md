@@ -53,10 +53,6 @@ Accept wildcard characters: False
 ### System.String
 
 ## NOTES
-Change log:
-    07/09/2017 - Chris Dent - Converted to filter.
-    06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    13/10/2011 - Chris Dent - Refactored.
 
 ## RELATED LINKS
 

@@ -1,4 +1,4 @@
-filter Get-NetworkAddress {
+function Get-NetworkAddress {
     <#
     .SYNOPSIS
         Get the network address for a network range.
@@ -22,30 +22,25 @@ filter Get-NetworkAddress {
         Get-NetworkAddress "10.0.23.21 255.255.255.224"
         
         Input values are automatically split into IP address and subnet mask. Returns the address 10.0.23.0.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            25/11/2010 - Chris Dent - Created.
     #>
     
     [CmdletBinding()]
-    [OutputType([System.Net.IPAddress])]
+    [OutputType([IPAddress])]
     param (
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [String]$IPAddress,
 
         [Parameter(Position = 2)]
         [String]$SubnetMask
     )
 
-    try {
-        $Network = ConvertToNetwork @psboundparameters
-        $decimalIP = ConvertTo-DecimalIP $Network.IPAddress
-        $decimalMask = ConvertTo-DecimalIP $Network.SubnetMask
+    process {
+        try {
+            $network = ConvertToNetwork @psboundparameters
 
-        ConvertTo-DottedDecimalIP ($decimalIP -band $decimalMask)
-    } catch {
-        $pscmdlet.ThrowTerminatingError($_)
+            return [IPAddress]($network.IPAddress.Address -band $network.SubnetMask.Address)
+        } catch {
+            Write-Error -ErrorRecord $_
+        }
     }
 }

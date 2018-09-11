@@ -20,21 +20,17 @@ function Test-SubnetMember {
         Test-SubnetMember -SubjectIPAddress 255.255.255.255 -ObjectIPAddress 0/0
         
         Returns true as the subject IP address is the last in the object network range.
-    .NOTES
-        Change log:
-            07/03/2016 - Chris Dent - Cleaned up code, added tests.
-            12/08/2013 - Chris Dent - Created.
     #>
 
     [CmdletBinding()]
-    [OutputType([System.Boolean])]
+    [OutputType([Boolean])]
     param (
         # A representation of the subject, the network to be tested. Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-        [Parameter(Mandatory = $true, Position = 1)]
+        [Parameter(Mandatory, Position = 1)]
         [String]$SubjectIPAddress,
 
         # A representation of the object, the network to test against. Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-        [Parameter(Mandatory = $true, Position = 2)]
+        [Parameter(Mandatory, Position = 2)]
         [String]$ObjectIPAddress,
 
         # A subnet mask as an IP address.

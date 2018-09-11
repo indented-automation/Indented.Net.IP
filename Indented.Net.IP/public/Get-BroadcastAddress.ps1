@@ -1,4 +1,4 @@
-filter Get-BroadcastAddress {
+function Get-BroadcastAddress {
     <#
     .SYNOPSIS
         Get the broadcast address for a network range.
@@ -22,18 +22,13 @@ filter Get-BroadcastAddress {
         Get-BroadcastAddress "10.0.0.42 255.255.255.252"
     
         Input values are automatically split into IP address and subnet mask. Returns the address 10.0.0.43.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            25/11/2010 - Chris Dent - Created.
     #>
     
     [CmdletBinding()]
-    [OutputType([System.Net.IPAddress])]
+    [OutputType([IPAddress])]
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [String]$IPAddress,
 
         # A subnet mask as an IP address.
@@ -41,13 +36,19 @@ filter Get-BroadcastAddress {
         [String]$SubnetMask
     )
 
-    try {
-        $network = ConvertToNetwork @psboundparameters
-        $decimalIP = ConvertTo-DecimalIP $network.IPAddress
-        $invertedMask = -bnot (ConvertTo-DecimalIP $network.SubnetMask) -band [UInt32]::MaxValue
+    process {
+        try {
+            $network = ConvertToNetwork @psboundparameters
 
-        ConvertTo-DottedDecimalIP ($decimalIP -bor $invertedMask)
-    } catch {
-        $pscmdlet.ThrowTerminatingError($_)
+            $networkAddress = [IPAddress]($network.IPAddress.Address -band $network.SubnetMask.Address)
+
+            return [IPAddress](
+                $networkAddress.Address -bor
+                -bnot $network.SubnetMask.Address -band
+                -bnot ([Int64][UInt32]::MaxValue -shl 32)
+            )
+        } catch {
+            Write-Error -ErrorRecord $_
+        }
     }
 }

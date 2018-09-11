@@ -12,17 +12,13 @@ function ConvertTo-Subnet {
         ConvertTo-Subnet 10.0.0.23/24
     .EXAMPLE
         ConvertTo-Subnet 10.0.0.23 255.255.255.0
-    .NOTES
-        Change log:
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            14/05/2014 - Chris Dent - Created.
     #>
     
     [CmdletBinding(DefaultParameterSetName = 'FromIPAndMask')]
     [OutputType('Indented.Net.IP.Subnet')]
     param (
         # Any IP address in the subnet.
-        [Parameter(Mandatory = $true, Position = 1, ParameterSetName = 'FromIPAndMask')]
+        [Parameter(Mandatory, Position = 1, ParameterSetName = 'FromIPAndMask')]
         [String]$IPAddress,
         
         # A subnet mask.
@@ -30,11 +26,11 @@ function ConvertTo-Subnet {
         [String]$SubnetMask,
         
         # The first IP address from a range.
-        [Parameter(Mandatory = $true, ParameterSetName = 'FromStartAndEnd')]
+        [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
         [IPAddress]$Start,
 
         # The last IP address from a range.
-        [Parameter(Mandatory = $true, ParameterSetName = 'FromStartAndEnd')]
+        [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
         [IPAddress]$End
     )
 

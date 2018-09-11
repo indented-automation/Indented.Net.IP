@@ -10,18 +10,13 @@ function ConvertTo-BinaryIP {
         ConvertTo-BinaryIP 1.2.3.4
 
         Convert an IP address to a binary format.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            25/11/2010 - Chris Dent - Created.
     #>
 
     [CmdletBinding()]
-    [OutputType([System.String])]
+    [OutputType([String])]
     param (
         # An IP Address to convert.
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [IPAddress]$IPAddress
     )
 

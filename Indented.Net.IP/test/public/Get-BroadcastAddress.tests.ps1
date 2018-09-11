@@ -27,13 +27,13 @@ InModuleScope Indented.Net.IP {
         }
         
         It 'Throws an error if passed something other than an IPAddress' {
-            { Get-BroadcastAddress 'abcd' } | Should Throw
+            { Get-BroadcastAddress 'abcd' -ErrorAction Stop } | Should Throw
         }
         
         It 'Has valid examples' {
             (Get-Help Get-BroadcastAddress).Examples.Example.Code | ForEach-Object {
                 $ScriptBlock = [ScriptBlock]::Create($_.Trim())
-                $ScriptBlock | Should Not Throw
+                $ScriptBlock | Should -Not -Throw
             }
         }
     }

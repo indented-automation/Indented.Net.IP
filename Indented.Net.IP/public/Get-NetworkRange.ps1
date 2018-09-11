@@ -6,8 +6,6 @@ filter Get-NetworkRange {
         Get-NetworkRange finds the network and broadcast address as decimal values then starts a counter between the two, returning IPAddress for each.
     .INPUTS
         System.String
-    .OUTPUTS
-        System.Net.IPAddress
     .EXAMPLE
         Get-NetworkRange 192.168.0.0 255.255.255.0
         
@@ -16,18 +14,13 @@ filter Get-NetworkRange {
         Get-NetworkRange 10.0.8.0/22
         
         Returns all IP addresses in the range 192.168.0.0 255.255.252.0.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            07/03/2016 - Chris Dent - Cleaned up code, added tests.
-            13/10/2011 - Chris Dent - Created.
     #>
 
     [CmdletBinding()]
-    [OutputType([System.Net.IPAddress])]
+    [OutputType([IPAddress])]
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [String]$IPAddress,
 
         # A subnet mask as an IP address.

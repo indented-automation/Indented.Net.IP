@@ -121,9 +121,6 @@ Accept wildcard characters: False
 ### System.Boolean
 
 ## NOTES
-Change log:
-    07/03/2016 - Chris Dent - Cleaned up code, added tests.
-    12/08/2013 - Chris Dent - Created.
 
 ## RELATED LINKS
 

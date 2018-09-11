@@ -12,25 +12,18 @@ function ConvertTo-HexIP {
         ConvertTo-HexIP 192.168.0.1
 
         Returns the hexadecimal string c0a80001.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            13/10/2011 - Chris Dent - Refactored.
     #>
 
     [CmdletBinding()]
-    [OutputType([System.String])]
+    [OutputType([String])]
     param (
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [IPAddress]$IPAddress
     )
 
-    $bytes = $IPAddress.GetAddressBytes()
-    $hex = ''
-    for ($i = 0; $i -lt $bytes.Count; $i++) {
-        $hex += '{0:x2}' -f $bytes[$i]
+    process {
+        $bytes = $IPAddress.GetAddressBytes()
+        [Array]::Reverse($bytes)
+        '{0:x8}' -f [BitConverter]::ToUInt32($bytes, 0)
     }
-    
-    $hex
 }

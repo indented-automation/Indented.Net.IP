@@ -115,9 +115,6 @@ Accept wildcard characters: False
 ### Indented.Net.IP.Subnet
 
 ## NOTES
-Change log:
-    06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    14/05/2014 - Chris Dent - Created.
 
 ## RELATED LINKS
 

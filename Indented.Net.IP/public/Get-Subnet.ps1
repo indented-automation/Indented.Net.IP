@@ -44,12 +44,12 @@ function Get-Subnet {
     }
     
     if ($network.MaskLength -gt $newNetwork.MaskLength) {
-        $errorRecord = New-Object System.Management.Automation.ErrorRecord(
-            (New-Object ArgumentException('The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.')),
+        $errorRecord = [ErrorRecord]::new(
+            [ArgumentException]'The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.',
             'NewSubnetMaskTooShort',
-            [System.Management.Automation.ErrorCategory]::InvalidArgument,
+            [ErrorCategory]::InvalidArgument,
             $NewNetwork.MaskLength
-        )            
+        )
         $pscmdlet.ThrowTerminatingError($errorRecord)
     }
 

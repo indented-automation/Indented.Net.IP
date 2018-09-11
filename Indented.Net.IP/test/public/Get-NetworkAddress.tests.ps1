@@ -25,7 +25,7 @@ InModuleScope Indented.Net.IP {
         }
         
         It 'Throws an error if passed something other than an IPAddress' {
-            { Get-NetworkAddress 'abcd' } | Should Throw
+            { Get-NetworkAddress 'abcd' -ErrorAction Stop } | Should -Throw
         }
         
         It 'Has valid examples' {
