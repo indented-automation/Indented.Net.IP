@@ -25,6 +25,6 @@ function ConvertTo-Mask {
     )
     
     process {
-        [IPAddress][Double][Convert]::ToUInt32(('1' * $MaskLength).PadRight(32, '0'), 2)
+        [IPAddress][UInt64][Convert]::ToUInt32(('1' * $MaskLength).PadRight(32, '0'), 2)
     }
 }

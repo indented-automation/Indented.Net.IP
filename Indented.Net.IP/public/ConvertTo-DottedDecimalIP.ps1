@@ -30,7 +30,7 @@ function ConvertTo-DottedDecimalIP {
             if ([Int64]::TryParse($IPAddress, [Ref]$value)) {
                 return [IPAddress]([IPAddress]::NetworkToHostOrder([Int64]$value) -shr 32 -band [UInt32]::MaxValue)
             } else {
-                [IPAddress][Double][Convert]::ToUInt32($IPAddress.Replace('.', ''), 2)
+                [IPAddress][UInt64][Convert]::ToUInt32($IPAddress.Replace('.', ''), 2)
             }
         } catch {
             $errorRecord = [ErrorRecord]::new(

@@ -21,5 +21,5 @@ filter ConvertFrom-HexIP {
         [String]$IPAddress
     )
 
-    [IPAddress][Double][Convert]::ToUInt32($IPAddress, 16)
+    [IPAddress][UInt64][Convert]::ToUInt32($IPAddress, 16)
 }
