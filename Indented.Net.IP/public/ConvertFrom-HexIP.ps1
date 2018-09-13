@@ -1,4 +1,4 @@
-filter ConvertFrom-HexIP {
+function ConvertFrom-HexIP {
     <#
     .SYNOPSIS
         Converts a hexadecimal IP address into a dotted decimal string.
@@ -21,5 +21,7 @@ filter ConvertFrom-HexIP {
         [String]$IPAddress
     )
 
-    [IPAddress][UInt64][Convert]::ToUInt32($IPAddress, 16)
+    process {
+        [IPAddress][UInt64][Convert]::ToUInt32($IPAddress, 16)
+    }
 }
