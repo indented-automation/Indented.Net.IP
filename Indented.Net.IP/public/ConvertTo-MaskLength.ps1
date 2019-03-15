@@ -8,7 +8,7 @@ function ConvertTo-MaskLength {
         System.Net.IPAddress
     .EXAMPLE
         ConvertTo-MaskLength 255.255.255.0
-        
+
         Returns 24, the length of the mask in bits.
     #>
 

@@ -23,7 +23,7 @@ function ConvertTo-DottedDecimalIP {
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [String]$IPAddress
     )
-    
+
     process {
         try {
             [Int64]$value = 0
@@ -33,10 +33,10 @@ function ConvertTo-DottedDecimalIP {
                 [IPAddress][UInt64][Convert]::ToUInt32($IPAddress.Replace('.', ''), 2)
             }
         } catch {
-            $errorRecord = [ErrorRecord]::new(
+            $errorRecord = [System.Management.Automation.ErrorRecord]::new(
                 [ArgumentException]'Cannot convert this format.',
                 'UnrecognisedFormat',
-                [ErrorCategory]::InvalidArgument,
+                'InvalidArgument',
                 $IPAddress
             )
             Write-Error -ErrorRecord $errorRecord

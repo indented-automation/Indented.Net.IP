@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -11,8 +12,15 @@ Get a list of IP addresses within the specified network.
 
 ## SYNTAX
 
+### FromIPAndMask (Default)
 ```
 Get-NetworkRange [-IPAddress] <String> [[-SubnetMask] <String>] [-IncludeNetworkAndBroadcast]
+ [<CommonParameters>]
+```
+
+### FromStartAndEnd
+```
+Get-NetworkRange -Start <IPAddress> -End <IPAddress> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,14 +28,14 @@ Get-NetworkRange finds the network and broadcast address as decimal values then 
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-NetworkRange 192.168.0.0 255.255.255.0
 ```
 
 Returns all IP addresses in the range 192.168.0.0/24.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-NetworkRange 10.0.8.0/22
 ```
@@ -41,8 +49,8 @@ Either a literal IP address, a network range expressed as CIDR notation, or an I
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: FromIPAndMask
+Aliases:
 
 Required: True
 Position: 2
@@ -56,8 +64,8 @@ A subnet mask as an IP address.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: FromIPAndMask
+Aliases:
 
 Required: False
 Position: 3
@@ -71,8 +79,8 @@ Include the network and broadcast addresses when generating a network address ra
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: FromIPAndMask
+Aliases:
 
 Required: False
 Position: Named
@@ -81,15 +89,46 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Start
+The start address of a range.
+
+```yaml
+Type: IPAddress
+Parameter Sets: FromStartAndEnd
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -End
+The end address of a range.
+
+```yaml
+Type: IPAddress
+Parameter Sets: FromStartAndEnd
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### System.String
-
 ## OUTPUTS
 
 ### System.Net.IPAddress
-
 ## NOTES
 
 ## RELATED LINKS
-

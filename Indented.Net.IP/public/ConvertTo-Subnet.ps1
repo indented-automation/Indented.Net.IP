@@ -13,18 +13,18 @@ function ConvertTo-Subnet {
     .EXAMPLE
         ConvertTo-Subnet 10.0.0.23 255.255.255.0
     #>
-    
+
     [CmdletBinding(DefaultParameterSetName = 'FromIPAndMask')]
     [OutputType('Indented.Net.IP.Subnet')]
     param (
         # Any IP address in the subnet.
         [Parameter(Mandatory, Position = 1, ParameterSetName = 'FromIPAndMask')]
         [String]$IPAddress,
-        
+
         # A subnet mask.
         [Parameter(Position = 2, ParameterSetName = 'FromIPAndMask')]
         [String]$SubnetMask,
-        
+
         # The first IP address from a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
         [IPAddress]$Start,
@@ -50,7 +50,7 @@ function ConvertTo-Subnet {
             if ($DecimalEnd -lt $DecimalStart) {
                 $Start = $End
             }
-            
+
             # Find the point the binary representation of each IP address diverges
             $i = 32
             do {
@@ -59,30 +59,31 @@ function ConvertTo-Subnet {
 
             $MaskLength = 32 - $i - 1
         }
-        
+
         try {
             $network = ConvertToNetwork $Start $MaskLength
         } catch {
             $pscmdlet.ThrowTerminatingError($_)
         }
     }
-    
+
     $hostAddresses = [Math]::Pow(2, (32 - $network.MaskLength)) - 2
     if ($hostAddresses -lt 0) {
         $hostAddresses = 0
     }
-    
+
     $subnet = [PSCustomObject]@{
         NetworkAddress   = Get-NetworkAddress $network.ToString()
         BroadcastAddress = Get-BroadcastAddress $network.ToString()
         SubnetMask       = $network.SubnetMask
         MaskLength       = $network.MaskLength
         HostAddresses    = $hostAddresses
-    } | Add-Member -TypeName 'Indented.Net.IP.Subnet' -PassThru
-    
+        PSTypeName       = 'Indented.Net.IP.Subnet'
+    }
+
     $subnet | Add-Member ToString -MemberType ScriptMethod -Force -Value {
         return '{0}/{1}' -f $this.NetworkAddress, $this.MaskLength
     }
-    
+
     $subnet
 }

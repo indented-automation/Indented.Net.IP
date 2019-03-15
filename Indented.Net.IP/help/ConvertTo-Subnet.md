@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -13,12 +14,12 @@ Convert a start and end IP address to the closest matching subnet.
 
 ### FromIPAndMask (Default)
 ```
-ConvertTo-Subnet [-IPAddress] <String> [[-SubnetMask] <String>]
+ConvertTo-Subnet [-IPAddress] <String> [[-SubnetMask] <String>] [<CommonParameters>]
 ```
 
 ### FromStartAndEnd
 ```
-ConvertTo-Subnet -Start <IPAddress> -End <IPAddress>
+ConvertTo-Subnet -Start <IPAddress> -End <IPAddress> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,22 +27,22 @@ ConvertTo-Subnet attempts to convert a starting and ending IP address from a ran
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 ConvertTo-Subnet -Start 0.0.0.0 -End 255.255.255.255
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 ConvertTo-Subnet -Start 192.168.0.1 -End 192.168.0.129
 ```
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 ConvertTo-Subnet 10.0.0.23/24
 ```
 
-### -------------------------- EXAMPLE 4 --------------------------
+### EXAMPLE 4
 ```
 ConvertTo-Subnet 10.0.0.23 255.255.255.0
 ```
@@ -54,7 +55,7 @@ Any IP address in the subnet.
 ```yaml
 Type: String
 Parameter Sets: FromIPAndMask
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -69,7 +70,7 @@ A subnet mask.
 ```yaml
 Type: String
 Parameter Sets: FromIPAndMask
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -84,7 +85,7 @@ The first IP address from a range.
 ```yaml
 Type: IPAddress
 Parameter Sets: FromStartAndEnd
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -99,7 +100,7 @@ The last IP address from a range.
 ```yaml
 Type: IPAddress
 Parameter Sets: FromStartAndEnd
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -108,13 +109,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
 
 ### Indented.Net.IP.Subnet
-
 ## NOTES
 
 ## RELATED LINKS
-

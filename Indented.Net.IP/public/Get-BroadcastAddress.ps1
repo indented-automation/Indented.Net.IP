@@ -8,22 +8,22 @@ function Get-BroadcastAddress {
         System.String
     .EXAMPLE
         Get-BroadcastAddress 192.168.0.243 255.255.255.0
-      
+
         Returns the address 192.168.0.255.
     .EXAMPLE
         Get-BroadcastAddress 10.0.9/22
-      
+
         Returns the address 10.0.11.255.
     .EXAMPLE
         Get-BroadcastAddress 0/0
-    
+
         Returns the address 255.255.255.255.
     .EXAMPLE
         Get-BroadcastAddress "10.0.0.42 255.255.255.252"
-    
+
         Input values are automatically split into IP address and subnet mask. Returns the address 10.0.0.43.
     #>
-    
+
     [CmdletBinding()]
     [OutputType([IPAddress])]
     param (

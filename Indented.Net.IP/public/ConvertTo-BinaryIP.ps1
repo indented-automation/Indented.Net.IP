@@ -20,12 +20,10 @@ function ConvertTo-BinaryIP {
         [IPAddress]$IPAddress
     )
 
-    process {  
-        $bytes = $IPAddress.GetAddressBytes()
-        $binary = for ($i = 0; $i -lt $Bytes.Count; $i++) {
-            [Convert]::ToString($Bytes[$i], 2).PadLeft(8, '0')
+    process {
+        $binary = foreach ($byte in $IPAddress.GetAddressBytes()) {
+            [Convert]::ToString($byte, 2).PadLeft(8, '0')
         }
-        
         $binary -join '.'
     }
 }

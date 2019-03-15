@@ -6,11 +6,11 @@ function Get-Subnet {
         Generates a list of subnets for a given network range using either the address class or a user-specified value.
     .EXAMPLE
         Get-Subnet 10.0.0.0 255.255.255.0 -NewSubnetMask 255.255.255.192
-        
+
         Four /26 networks are returned.
     .EXAMPLE
         Get-Subnet 0/22 -NewSubnetMask 24
-        
+
         64 /24 networks are returned.
     .NOTES
         Change log:
@@ -29,7 +29,7 @@ function Get-Subnet {
         # The subnet mask of the network to split. Mandatory if the subnet mask is not included in the IPAddress parameter.
         [Parameter(Position = 2)]
         [String]$SubnetMask,
-        
+
         # Split the existing network described by the IPAddress and subnet mask using this mask.
         [Parameter(Mandatory = $true)]
         [String]$NewSubnetMask
@@ -42,12 +42,12 @@ function Get-Subnet {
     } catch {
         $pscmdlet.ThrowTerminatingError($_)
     }
-    
+
     if ($network.MaskLength -gt $newNetwork.MaskLength) {
-        $errorRecord = [ErrorRecord]::new(
+        $errorRecord = [System.Management.Automation.ErrorRecord]::new(
             [ArgumentException]'The subnet mask of the new network is shorter (masks fewer addresses) than the subnet mask of the existing network.',
             'NewSubnetMaskTooShort',
-            [ErrorCategory]::InvalidArgument,
+            'InvalidArgument',
             $NewNetwork.MaskLength
         )
         $pscmdlet.ThrowTerminatingError($errorRecord)
@@ -59,8 +59,8 @@ function Get-Subnet {
     $decimalAddress = ConvertTo-DecimalIP (Get-NetworkAddress $network.ToString())
     for ($i = 0; $i -lt $numberOfNets; $i++) {
         $networkAddress = ConvertTo-DottedDecimalIP $decimalAddress
-        
-        ConvertTo-Subnet $networkAddress $newNetwork.MaskLength
+
+        ConvertTo-Subnet -IPAddress $networkAddress -SubnetMask $newNetwork.MaskLength
 
         $decimalAddress += $numberOfAddresses
     }

@@ -13,7 +13,7 @@ function ConvertTo-DecimalIP {
     #>
 
     [CmdletBinding()]
-    [OutputType([System.UInt32])]
+    [OutputType([UInt32])]
     param (
         # An IP Address to convert.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline )]
