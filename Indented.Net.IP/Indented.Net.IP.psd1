@@ -12,7 +12,10 @@
 RootModule = 'Indented.Net.IP.psm1'
 
 # Version number of this module.
-ModuleVersion = '5.0.12'
+ModuleVersion = '6.0.0'
+
+# Supported PSEditions
+CompatiblePSEditions = @('Core', 'Desk')
 
 # ID used to uniquely identify this module
 GUID = 'da36f971-e698-46c7-bffc-5d2d35a6f505'
@@ -30,7 +33,7 @@ Copyright = '(c) 2016 Chris Dent'
 Description = 'A collection of commands written to perform IPv4 subnet math.'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '4.0'
+PowerShellVersion = '5.1'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''

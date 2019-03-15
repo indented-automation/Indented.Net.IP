@@ -3,7 +3,7 @@ InModuleScope Indented.Net.IP {
         It 'Returns a 32-bit integer' {
             ConvertTo-MaskLength 255.0.0.0 | Should BeOfType [Int32]
         }
-        
+
         It 'Converts 0.0.0.0 to 0' {
             ConvertTo-MaskLength 0.0.0.0 | Should Be 0
         }
@@ -23,7 +23,7 @@ InModuleScope Indented.Net.IP {
         It 'Throws an error if passed something other than an IPAddress' {
             { ConvertTo-MaskLength 'abcd' } | Should Throw
         }
-        
+
         It 'Has valid examples' {
             (Get-Help ConvertTo-MaskLength).Examples.Example.Code | ForEach-Object {
                 $ScriptBlock = [ScriptBlock]::Create($_.Trim())

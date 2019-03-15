@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Get the network address for a network range.
 ## SYNTAX
 
 ```
-Get-NetworkAddress [-IPAddress] <String> [[-SubnetMask] <String>]
+Get-NetworkAddress [-IPAddress] <String> [[-SubnetMask] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,21 +21,21 @@ Get-NetworkAddress returns the network address for a subnet by performing a bitw
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-NetworkAddress 192.168.0.243 255.255.255.0
 ```
 
 Returns the address 192.168.0.0.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-NetworkAddress 10.0.9/22
 ```
 
 Returns the address 10.0.8.0.
 
-### -------------------------- EXAMPLE 3 --------------------------
+### EXAMPLE 3
 ```
 Get-NetworkAddress "10.0.23.21 255.255.255.224"
 ```
@@ -50,7 +51,7 @@ Either a literal IP address, a network range expressed as CIDR notation, or an I
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -65,7 +66,7 @@ A subnet mask as an IP address.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -74,19 +75,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### System.String
-
 ## OUTPUTS
 
 ### System.Net.IPAddress
-
 ## NOTES
-Change log:
-    07/09/2017 - Chris Dent - Converted to filter.
-    06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    25/11/2010 - Chris Dent - Created.
 
 ## RELATED LINKS
-

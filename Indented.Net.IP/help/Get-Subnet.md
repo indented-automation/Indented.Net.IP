@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Get a list of subnets of a given size within a defined supernet.
 ## SYNTAX
 
 ```
-Get-Subnet [-IPAddress] <String> [[-SubnetMask] <String>] -NewSubnetMask <String>
+Get-Subnet [-IPAddress] <String> [[-SubnetMask] <String>] -NewSubnetMask <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -20,14 +21,14 @@ Generates a list of subnets for a given network range using either the address c
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 Get-Subnet 10.0.0.0 255.255.255.0 -NewSubnetMask 255.255.255.192
 ```
 
 Four /26 networks are returned.
 
-### -------------------------- EXAMPLE 2 --------------------------
+### EXAMPLE 2
 ```
 Get-Subnet 0/22 -NewSubnetMask 24
 ```
@@ -43,7 +44,7 @@ Either a literal IP address, a network range expressed as CIDR notation, or an I
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -59,7 +60,7 @@ Mandatory if the subnet mask is not included in the IPAddress parameter.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: 3
@@ -74,7 +75,7 @@ Split the existing network described by the IPAddress and subnet mask using this
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -83,12 +84,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ## OUTPUTS
 
 ### Indented.Net.IP.Subnet
-
 ## NOTES
 Change log:
     07/03/2016 - Chris Dent - Cleaned up code, added tests.
@@ -96,4 +100,3 @@ Change log:
     13/10/2011 - Chris Dent - Created.
 
 ## RELATED LINKS
-

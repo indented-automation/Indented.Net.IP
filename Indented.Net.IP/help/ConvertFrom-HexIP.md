@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Converts a hexadecimal IP address into a dotted decimal string.
 ## SYNTAX
 
 ```
-ConvertFrom-HexIP [-IPAddress] <String>
+ConvertFrom-HexIP [-IPAddress] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +22,7 @@ An intermediate call is made to ConvertTo-DottedDecimalIP.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 ConvertFrom-HexIP c0a80001
 ```
@@ -36,7 +37,7 @@ An IP Address to convert.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -45,19 +46,16 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### System.String
-
 ## OUTPUTS
 
 ### System.Net.IPAddress
-
 ## NOTES
-Change log:
-    07/09/2017 - Chris Dent - Converted to filter.
-    06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    13/10/2011 - Chris Dent - Created.
 
 ## RELATED LINKS
-

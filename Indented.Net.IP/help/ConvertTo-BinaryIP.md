@@ -1,6 +1,7 @@
 ---
 external help file: Indented.Net.IP-help.xml
-online version: 
+Module Name: Indented.Net.IP
+online version:
 schema: 2.0.0
 ---
 
@@ -12,7 +13,7 @@ Converts a Decimal IP address into a binary format.
 ## SYNTAX
 
 ```
-ConvertTo-BinaryIP [-IPAddress] <IPAddress>
+ConvertTo-BinaryIP [-IPAddress] <IPAddress> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +22,7 @@ The output from this function is dotted binary.
 
 ## EXAMPLES
 
-### -------------------------- EXAMPLE 1 --------------------------
+### EXAMPLE 1
 ```
 ConvertTo-BinaryIP 1.2.3.4
 ```
@@ -36,7 +37,7 @@ An IP Address to convert.
 ```yaml
 Type: IPAddress
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -45,19 +46,16 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
 ### System.Net.IPAddress
-
 ## OUTPUTS
 
 ### System.String
-
 ## NOTES
-Change log:
-    07/09/2017 - Chris Dent - Converted to filter.
-    06/03/2016 - Chris Dent - Cleaned up code, added tests.
-    25/11/2010 - Chris Dent - Created.
 
 ## RELATED LINKS
-

@@ -1,4 +1,4 @@
-filter ConvertTo-DottedDecimalIP {
+function ConvertTo-DottedDecimalIP {
     <#
     .SYNOPSIS
         Converts either an unsigned 32-bit integer or a dotted binary string to an IP Address.
@@ -14,55 +14,32 @@ filter ConvertTo-DottedDecimalIP {
         ConvertTo-DottedDecimalIP 3232235521
 
         Convert the decimal form back to dotted decimal, resulting in 192.168.0.1.
-    .NOTES
-        Change log:
-            07/09/2017 - Chris Dent - Converted to filter.
-            06/03/2016 - Chris Dent - Cleaned up code, added tests.
-            25/11/2010 - Chris Dent - Created.
     #>
 
     [CmdletBinding()]
-    [OutputType([System.Net.IPAddress])]
+    [OutputType([IPAddress])]
     param (
         # A string representation of an IP address from either UInt32 or dotted binary.
-        [Parameter(Mandatory = $true, Position = 1, ValueFromPipeline = $true)]
+        [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
         [String]$IPAddress
     )
-    
-    switch -regex ($IPAddress) {
-        "([01]{8}\.){3}[01]{8}" {
-            return [IPAddress]([String]::Join('.', $( $IPAddress -split '\.' | ForEach-Object { [Convert]::ToUInt32($_, 2) } )))
-        }
-        "\d" {
-            $Decimal = [UInt32]$IPAddress
-            $DottedDecimalIP = ''
-            for ($i = 3; $i -ge 0; $i--) {
-                $Remainder = $Decimal % [Math]::Pow(256, $i)
 
-                $DottedDecimalIP += ($Decimal - $Remainder) / [Math]::Pow(256, $i)
-                if ($i -gt 0) { 
-                    $DottedDecimalIP += '.'
-                }
-
-                $Decimal = $Remainder
+    process {
+        try {
+            [Int64]$value = 0
+            if ([Int64]::TryParse($IPAddress, [Ref]$value)) {
+                return [IPAddress]([IPAddress]::NetworkToHostOrder([Int64]$value) -shr 32 -band [UInt32]::MaxValue)
+            } else {
+                [IPAddress][UInt64][Convert]::ToUInt32($IPAddress.Replace('.', ''), 2)
             }
-            
-            $DottedIP = 3..0 | ForEach-Object {
-                $Remainder = $IPAddress % [Math]::Pow(256, $_)
-                ($IPAddress - $Remainder) / [Math]::Pow(256, $_)
-                $IPAddress = $Remainder
-            }
-        
-            return [IPAddress]($DottedIP -join '.')
-        }
-        default {
-            $ErrorRecord = New-Object System.Management.Automation.ErrorRecord(
-                (New-Object ArgumentException 'Cannot convert this format.'),
+        } catch {
+            $errorRecord = [System.Management.Automation.ErrorRecord]::new(
+                [ArgumentException]'Cannot convert this format.',
                 'UnrecognisedFormat',
-                [System.Management.Automation.ErrorCategory]::InvalidArgument,
+                'InvalidArgument',
                 $IPAddress
             )
-            Write-Error -ErrorRecord $ErrorRecord
+            Write-Error -ErrorRecord $errorRecord
         }
     }
 }
