@@ -41,14 +41,14 @@ function Get-NetworkRange {
     )
 
     process {
-        try {
-            $null = $psboundparameters.Remove('IncludeNetworkAndBroadcast')
-            $network = ConvertToNetwork @psboundparameters
-        } catch {
-            $pscmdlet.ThrowTerminatingError($_)
-        }
-
         if ($pscmdlet.ParameterSetName -eq 'FromIPAndMask') {
+            try {
+                $null = $psboundparameters.Remove('IncludeNetworkAndBroadcast')
+                $network = ConvertToNetwork @psboundparameters
+            } catch {
+                $pscmdlet.ThrowTerminatingError($_)
+            }
+
             $decimalIP = ConvertTo-DecimalIP $network.IPAddress
             $decimalMask = ConvertTo-DecimalIP $network.SubnetMask
 
