@@ -12,10 +12,10 @@
 RootModule = 'Indented.Net.IP.psm1'
 
 # Version number of this module.
-ModuleVersion = '6.0.0'
+ModuleVersion = '6.0.1'
 
 # Supported PSEditions
-CompatiblePSEditions = @('Core', 'Desk')
+CompatiblePSEditions = @('Core', 'Desktop')
 
 # ID used to uniquely identify this module
 GUID = 'da36f971-e698-46c7-bffc-5d2d35a6f505'
