@@ -1,3 +1,19 @@
+#region:TestFileHeader
+param (
+    [Boolean]$UseExisting
+)
+
+if (-not $UseExisting) {
+    $moduleBase = $psscriptroot.Substring(0, $psscriptroot.IndexOf("\test"))
+    $stubBase = Resolve-Path (Join-Path $moduleBase "test*\stub\*")
+    if ($null -ne $stubBase) {
+        $stubBase | Import-Module -Force
+    }
+
+    Import-Module $moduleBase -Force
+}
+#endregion
+
 InModuleScope Indented.Net.IP {
     Describe 'ConvertTo-DottedDecimalIP' {
         It 'Converts 00000001.00000010.00000011.00000100 to 1.2.3.4' {
