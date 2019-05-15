@@ -16,10 +16,10 @@ install:
       Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
       Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
       Install-Module InvokeBuild, Indented.Build
-      Set-Location $env:APPVEYOR_BUILD_FOLDER\$env:APPVEYOR_PROJECT_NAME
+      Set-Location $env:APPVEYOR_BUILD_FOLDER
   - pwsh: |
-      Set-Location $env:APPVEYOR_BUILD_FOLDER\$env:APPVEYOR_PROJECT_NAME
       Install-Module InvokeBuild, Indented.Build
+      Set-Location $env:APPVEYOR_BUILD_FOLDER
 
 build_script:
   - ps: Start-Build -BuildType Setup, Build
