@@ -2,6 +2,10 @@ image: Visual Studio 2017
 
 version: 6.0.1.{build}
 
+branches:
+  only:
+    - master
+
 skip_commits:
   message: /updated? readme.*s/
 
