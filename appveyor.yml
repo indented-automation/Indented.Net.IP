@@ -23,7 +23,6 @@ install:
 
 build_script:
   - ps: Start-Build -BuildType Setup, Build
-  - pwsh: Start-Build -BuildType Setup, Build
 
 test_script:
   - ps: Start-Build -BuildType Setup, Test
