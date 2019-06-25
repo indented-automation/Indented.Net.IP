@@ -1,5 +1,6 @@
 $private = @(
     'ConvertToNetwork'
+    'GetPermutation'
 )
 
 foreach ($file in $private) {
@@ -20,6 +21,7 @@ $public = @(
     'Get-NetworkRange'
     'Get-NetworkSummary'
     'Get-Subnet'
+    'Resolve-IPAddress'
     'Test-SubnetMember'
 )
 
@@ -41,6 +43,7 @@ $functionsToExport = @(
     'Get-NetworkRange'
     'Get-NetworkSummary'
     'Get-Subnet'
+    'Resolve-IPAddress'
     'Test-SubnetMember'
 )
 Export-ModuleMember -Function $functionsToExport
