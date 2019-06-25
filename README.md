@@ -4,7 +4,13 @@
 
 A collection of commands written to perform IPv4 subnet math.
 
-# Commands
+## Installation
+
+```powershell
+Install-Module Indented.Net.IP
+```
+
+## Commands
 
 | Name | Synopsis |
 | --- | --- |
@@ -19,6 +25,7 @@ A collection of commands written to perform IPv4 subnet math.
 | Get-BroadcastAddress | Get the broadcast address for a network range. |
 | Get-NetworkAddress | Get the network address for a network range. |
 | Get-NetworkRange | Get a list of IP addresses within the specified network. |
-| Get-NetworkSummary | Generates a summary describing several properties of a network range |
+| Get-NetworkSummary | Generates a summary describing several properties of a network range. |
 | Get-Subnet | Get a list of subnets of a given size within a defined supernet. |
+| Resolve-IPAddress | Resolves an IP address expression using wildcard expressions to individual IP addresses. |
 | Test-SubnetMember | Tests an IP address to determine if it falls within IP address range. |
