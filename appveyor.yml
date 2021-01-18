@@ -5,6 +5,7 @@ version: 6.1.0.{build}
 branches:
   only:
     - main
+    - master
 
 skip_commits:
   message: /updated? readme.*s/
