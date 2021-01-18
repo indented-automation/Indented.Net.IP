@@ -1,49 +1,60 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 version: 6.1.0.{build}
 
 branches:
   only:
-    - master
+    - main
 
 skip_commits:
   message: /updated? readme.*s/
 
 environment:
   nugetapikey:
-    secure: kp9PPkiJ/iiPfX0b1m/NYh88GLaok3NlJc1XAr6rWH+umpCiZVwvsK9CVfMNYElL
+    secure: 0z7hjgYRMchcf6Mmo1hBq8/zRBYnfJNvQF9cIc0bcli8mJD8pssECdWwyU2eVqgv
 
 build: false
 
 install:
-  - ps: |
-      Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-      Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-      Install-Module InvokeBuild, Indented.Build
-      Set-Location $env:APPVEYOR_BUILD_FOLDER
   - pwsh: |
-      Install-Module InvokeBuild, Indented.Build
+      Install-Module Configuration, ModuleBuilder, Pester, PSScriptAnalyzer -Force -SkipPublisherCheck
+      Set-Location $env:APPVEYOR_BUILD_FOLDER
+  - ps: |
+      Install-Module Pester, PSScriptAnalyzer -Force -SkipPublisherCheck
       Set-Location $env:APPVEYOR_BUILD_FOLDER
 
 build_script:
-  - ps: Start-Build -BuildType Setup, Build
+  - pwsh: |
+      .\build.ps1 -TaskName Clean, Build
 
 test_script:
-  - ps: Start-Build -BuildType Setup, Test
-  - pwsh: Start-Build -BuildType Setup, Test
+  - ps: .\build.ps1 -TaskName Test
+  - pwsh: .\build.ps1 -TaskName Test
 
 on_success:
   - ps: |
-      $buildInfo = Get-BuildInfo
-      [Version]$tagVersion = (git describe --tags --abbrev=0 2>$null) -replace "^v"
+      $tagVersion = (git describe --tags --abbrev=0 2>$null) -replace "^v" -as [Version]
 
-      if ($tagVersion -eq $buildInfo.Version) {
-          $galleryVersion = [Version](Find-Module $buildInfo.ModuleName).Version
-          if ($buildInfo.Version -gt $galleryVersion) {
-              Start-Build -BuildType Setup, Publish
+      $shouldPublish = $env:APPVEYOR_REPO_BRANCH -in 'master', 'main' -and
+          $tagVersion -and
+          -not $env:APPVEYOR_PULL_REQUEST_NUMBER
+
+      if ($shouldPublish) {
+          $moduleManifestPath = Join-Path -Path $env:APPVEYOR_BUILD_FOLDER -ChildPath 'build\*\*\*.psd1' |
+              Get-Item |
+              Where-Object { $_.BaseName -eq $_.Directory.Parent.Name }
+          $moduleManifest = Import-PowerShellDataFile -Path $moduleManifestPath.FullName
+          $buildVersion = $moduleManifest['ModuleVersion'] -as [Version]
+
+          if ($tagVersion -eq $buildVersion) {
+              $galleryModule = Find-Module $moduleManifestPath.BaseName -ErrorAction SilentlyContinue
+
+              if (-not $galleryModule -or $buildVersion -gt $galleryModule.Version) {
+                  .\build.ps1 -TaskName Publish
+              } else {
+                  Write-Host ('Skipping publish: {0} is already published' -f $buildVersion) -ForegroundColor Green
+              }
           } else {
-              Write-Host "Skipping publish: Already published" -ForegroundColor Green
+              Write-Host ('Skipping publish: Tag {0} does not match build version {1}' -f $tagVersion, $buildVersion)
           }
-      } else {
-          Write-Host "Skipping publish: Last tag does not match build version" -ForegroundColor Yellow
       }
