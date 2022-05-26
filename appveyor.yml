@@ -12,7 +12,7 @@ skip_commits:
 
 environment:
   nugetapikey:
-    secure: 0z7hjgYRMchcf6Mmo1hBq8/zRBYnfJNvQF9cIc0bcli8mJD8pssECdWwyU2eVqgv
+    secure: 5F/InX2bLI4XueEUzVqXPvQQFEW4GDZw6k/gtaVbZYLZYDSdWRIjf0MkexqdYemF
 
 build: false
 
