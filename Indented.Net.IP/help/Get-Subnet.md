@@ -12,8 +12,14 @@ Get a list of subnets of a given size within a defined supernet.
 
 ## SYNTAX
 
+### FromSupernet (Default)
 ```
 Get-Subnet [-IPAddress] <String> [[-SubnetMask] <String>] -NewSubnetMask <String> [<CommonParameters>]
+```
+
+### FromStartAndEnd
+```
+Get-Subnet -Start <IPAddress> -End <IPAddress> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,6 +41,13 @@ Get-Subnet 0/22 -NewSubnetMask 24
 
 64 /24 networks are returned.
 
+### EXAMPLE 3
+```
+Get-Subnet -Start 10.0.0.1 -End 10.0.0.16
+```
+
+Get the largest possible subnets between the start and end address.
+
 ## PARAMETERS
 
 ### -IPAddress
@@ -43,7 +56,7 @@ Either a literal IP address, a network range expressed as CIDR notation, or an I
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: FromSupernet
 Aliases:
 
 Required: True
@@ -59,7 +72,7 @@ Mandatory if the subnet mask is not included in the IPAddress parameter.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: FromSupernet
 Aliases:
 
 Required: False
@@ -74,7 +87,37 @@ Split the existing network described by the IPAddress and subnet mask using this
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: FromSupernet
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Start
+The first IP address from a range.
+
+```yaml
+Type: IPAddress
+Parameter Sets: FromStartAndEnd
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -End
+The last IP address from a range.
+
+```yaml
+Type: IPAddress
+Parameter Sets: FromStartAndEnd
 Aliases:
 
 Required: True
@@ -93,9 +136,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### Indented.Net.IP.Subnet
 ## NOTES
-Change log:
-    07/03/2016 - Chris Dent - Cleaned up code, added tests.
-    12/12/2015 - Chris Dent - Redesigned.
-    13/10/2011 - Chris Dent - Created.
 
 ## RELATED LINKS

@@ -2,16 +2,26 @@ function ConvertTo-Subnet {
     <#
     .SYNOPSIS
         Convert a start and end IP address to the closest matching subnet.
+
     .DESCRIPTION
         ConvertTo-Subnet attempts to convert a starting and ending IP address from a range to the closest subnet.
+
     .EXAMPLE
         ConvertTo-Subnet -Start 0.0.0.0 -End 255.255.255.255
+
+        Returns a subnet object describing 0.0.0.0/0.
     .EXAMPLE
         ConvertTo-Subnet -Start 192.168.0.1 -End 192.168.0.129
+
+        Returns a subnet object describing 192.168.0.0/24. The smallest subnet which can encapsulate the start and end range.
     .EXAMPLE
         ConvertTo-Subnet 10.0.0.23/24
+
+        Returns a subnet object describing 10.0.0.0/24.
     .EXAMPLE
         ConvertTo-Subnet 10.0.0.23 255.255.255.0
+
+        Returns a subnet object describing 10.0.0.0/24.
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'FromIPAndMask')]
@@ -19,11 +29,11 @@ function ConvertTo-Subnet {
     param (
         # Any IP address in the subnet.
         [Parameter(Mandatory, Position = 1, ParameterSetName = 'FromIPAndMask')]
-        [String]$IPAddress,
+        [string]$IPAddress,
 
         # A subnet mask.
         [Parameter(Position = 2, ParameterSetName = 'FromIPAndMask')]
-        [String]$SubnetMask,
+        [string]$SubnetMask,
 
         # The first IP address from a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
@@ -34,13 +44,14 @@ function ConvertTo-Subnet {
         [IPAddress]$End
     )
 
-    if ($pscmdlet.ParameterSetName -eq 'FromIPAndMask') {
+    if ($PSCmdlet.ParameterSetName -eq 'FromIPAndMask') {
         try {
-            $network = ConvertToNetwork @psboundparameters
+            $network = ConvertToNetwork @PSBoundParameters
+            NewSubnet -NetworkAddress (Get-NetworkAddress $network.ToString()) -MaskLength $network.MaskLength
         } catch {
-            $pscmdlet.ThrowTerminatingError($_)
+            $PSCmdlet.ThrowTerminatingError($_)
         }
-    } elseif ($pscmdlet.ParameterSetName -eq 'FromStartAndEnd') {
+    } elseif ($PSCmdlet.ParameterSetName -eq 'FromStartAndEnd') {
         if ($Start -eq $End) {
             $MaskLength = 32
         } else {
@@ -60,30 +71,6 @@ function ConvertTo-Subnet {
             $MaskLength = 32 - $i - 1
         }
 
-        try {
-            $network = ConvertToNetwork $Start $MaskLength
-        } catch {
-            $pscmdlet.ThrowTerminatingError($_)
-        }
+        NewSubnet -NetworkAddress (Get-NetworkAddress $Start -SubnetMask $MaskLength) -MaskLength $MaskLength
     }
-
-    $hostAddresses = [Math]::Pow(2, (32 - $network.MaskLength)) - 2
-    if ($hostAddresses -lt 0) {
-        $hostAddresses = 0
-    }
-
-    $subnet = [PSCustomObject]@{
-        NetworkAddress   = Get-NetworkAddress $network.ToString()
-        BroadcastAddress = Get-BroadcastAddress $network.ToString()
-        SubnetMask       = $network.SubnetMask
-        MaskLength       = $network.MaskLength
-        HostAddresses    = $hostAddresses
-        PSTypeName       = 'Indented.Net.IP.Subnet'
-    }
-
-    $subnet | Add-Member ToString -MemberType ScriptMethod -Force -Value {
-        return '{0}/{1}' -f $this.NetworkAddress, $this.MaskLength
-    }
-
-    $subnet
 }

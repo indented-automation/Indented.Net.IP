@@ -21,4 +21,11 @@ Describe 'Get-Subnet' {
     It 'Throws an error if requested to subnet a smaller network into a larger one' {
         { Get-Subnet 0/24 -NetSubnetMask 23 } | Should -Throw
     }
+
+    It 'Generates maximum sized subnets for a range starting <Start> and ending <End>' -TestCases @(
+        @{ Start = '10.0.0.1'; End = '10.0.0.16'; Expects = @('10.0.0.1/32', '10.0.0.2/31', '10.0.0.4/30', '10.0.0.8/29', '10.0.0.16/32') }
+        @{ Start = '10.0.0.1'; End = '10.0.0.151'; Expects = @('10.0.0.1/32', '10.0.0.2/31', '10.0.0.4/30', '10.0.0.8/29', '10.0.0.16/28', '10.0.0.32/27', '10.0.0.64/26', '10.0.0.128/28', '10.0.0.144/29') }
+    ) {
+        Get-Subnet -Start $Start -End $End | Should -Be $Expects
+    }
 }

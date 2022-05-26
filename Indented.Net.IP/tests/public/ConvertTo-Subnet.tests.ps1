@@ -5,7 +5,7 @@ Describe 'ConvertTo-Subnet' {
         }
 
         $FromIPAndMask = @{
-        IPAddress = '0.0.0.0/32'
+            IPAddress = '0.0.0.0/32'
         }
         $FromStartAndEnd = @{
             Start = '0.0.0.0'

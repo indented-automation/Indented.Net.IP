@@ -2,22 +2,28 @@ function Get-BroadcastAddress {
     <#
     .SYNOPSIS
         Get the broadcast address for a network range.
+
     .DESCRIPTION
         Get-BroadcastAddress returns the broadcast address for a subnet by performing a bitwise AND operation against the decimal forms of the IP address and inverted subnet mask.
+
     .INPUTS
         System.String
+
     .EXAMPLE
         Get-BroadcastAddress 192.168.0.243 255.255.255.0
 
         Returns the address 192.168.0.255.
+
     .EXAMPLE
         Get-BroadcastAddress 10.0.9/22
 
         Returns the address 10.0.11.255.
+
     .EXAMPLE
         Get-BroadcastAddress 0/0
 
         Returns the address 255.255.255.255.
+
     .EXAMPLE
         Get-BroadcastAddress "10.0.0.42 255.255.255.252"
 
@@ -29,16 +35,16 @@ function Get-BroadcastAddress {
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [String]$IPAddress,
+        [string]$IPAddress,
 
         # A subnet mask as an IP address.
         [Parameter(Position = 2)]
-        [String]$SubnetMask
+        [string]$SubnetMask
     )
 
     process {
         try {
-            $network = ConvertToNetwork @psboundparameters
+            $network = ConvertToNetwork @PSBoundParameters
 
             $networkAddress = [IPAddress]($network.IPAddress.Address -band $network.SubnetMask.Address)
 

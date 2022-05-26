@@ -2,6 +2,7 @@ function Resolve-IPAddress {
     <#
     .SYNOPSIS
         Resolves an IP address expression using wildcard expressions to individual IP addresses.
+
     .DESCRIPTION
         Resolves an IP address expression using wildcard expressions to individual IP addresses.
 
@@ -10,6 +11,7 @@ function Resolve-IPAddress {
         Ranges of values may be specied using a start and end value using "-" to separate the values.
 
         Specific values may be listed as a comma separated list.
+
     .EXAMPLE
         Resolve-IPAddress "10.[1,2].[0-2].0/24"
 
@@ -20,7 +22,7 @@ function Resolve-IPAddress {
     param (
         # The IPAddress expression to resolve.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [String]$IPAddress
+        [string]$IPAddress
     )
 
     process {
@@ -30,7 +32,7 @@ function Resolve-IPAddress {
                 $group = $_
 
                 $values = switch ($group.Name) {
-                    'Range'    {
+                    'Range' {
                         [int]$start, [int]$end = $group.Value -split '-'
 
                         if ($start, $end -gt 255) {
@@ -40,7 +42,7 @@ function Resolve-IPAddress {
                                 'InvalidArgument',
                                 $group.Value
                             )
-                            $pscmdlet.ThrowTerminatingError($errorRecord)
+                            $PSCmdlet.ThrowTerminatingError($errorRecord)
                         }
 
                         $start..$end
@@ -55,7 +57,7 @@ function Resolve-IPAddress {
                                 'InvalidArgument',
                                 $group.Value
                             )
-                            $pscmdlet.ThrowTerminatingError($errorRecord)
+                            $PSCmdlet.ThrowTerminatingError($errorRecord)
                         }
 
                         $values
@@ -67,7 +69,7 @@ function Resolve-IPAddress {
 
                 [PSCustomObject]@{
                     Name        = $_.Name
-                    Position    = [Int32]$IPAddress.Substring(0, $_.Index).Split('.').Count - 1
+                    Position    = [int]$IPAddress.Substring(0, $_.Index).Split('.').Count - 1
                     ReplaceWith = $values
                     PSTypeName  = 'ExpansionGroupInfo'
                 }

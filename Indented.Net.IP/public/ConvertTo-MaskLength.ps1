@@ -2,10 +2,13 @@ function ConvertTo-MaskLength {
     <#
     .SYNOPSIS
         Convert a dotted-decimal subnet mask to a mask length.
+
     .DESCRIPTION
         A count of the number of 1's in a binary string.
+
     .INPUTS
         System.Net.IPAddress
+
     .EXAMPLE
         ConvertTo-MaskLength 255.255.255.0
 

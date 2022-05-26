@@ -23,7 +23,7 @@ function ConvertToNetwork {
         [String]$SubnetMask
     )
 
-    $validSubnetMaskValues =
+    $validSubnetMaskValues = @(
         "0.0.0.0", "128.0.0.0", "192.0.0.0",
         "224.0.0.0", "240.0.0.0", "248.0.0.0", "252.0.0.0",
         "254.0.0.0", "255.0.0.0", "255.128.0.0", "255.192.0.0",
@@ -33,6 +33,7 @@ function ConvertToNetwork {
         "255.255.254.0", "255.255.255.0", "255.255.255.128", "255.255.255.192",
         "255.255.255.224", "255.255.255.240", "255.255.255.248", "255.255.255.252",
         "255.255.255.254", "255.255.255.255"
+    )
 
     $network = [PSCustomObject]@{
         IPAddress  = $null
@@ -46,7 +47,7 @@ function ConvertToNetwork {
         '{0}/{1}' -f $this.IPAddress, $this.MaskLength
     }
 
-    if (-not $psboundparameters.ContainsKey('SubnetMask') -or $SubnetMask -eq '') {
+    if (-not $PSBoundParameters.ContainsKey('SubnetMask') -or $SubnetMask -eq '') {
         $IPAddress, $SubnetMask = $IPAddress.Split([Char[]]'\/ ', [StringSplitOptions]::RemoveEmptyEntries)
     }
 
@@ -65,7 +66,7 @@ function ConvertToNetwork {
             'InvalidArgument',
             $IPAddress
         )
-        $pscmdlet.ThrowTerminatingError($errorRecord)
+        $PSCmdlet.ThrowTerminatingError($errorRecord)
     }
 
     # SubnetMask
@@ -86,7 +87,7 @@ function ConvertToNetwork {
                     'InvalidArgument',
                     $SubnetMask
                 )
-                $pscmdlet.ThrowTerminatingError($errorRecord)
+                $PSCmdlet.ThrowTerminatingError($errorRecord)
             }
         } else {
             while ($SubnetMask.Split('.').Count -lt 4) {
@@ -104,7 +105,7 @@ function ConvertToNetwork {
                     'InvalidArgument',
                     $SubnetMask
                 )
-                $pscmdlet.ThrowTerminatingError($errorRecord)
+                $PSCmdlet.ThrowTerminatingError($errorRecord)
             }
         }
     }

@@ -2,6 +2,7 @@ function GetPermutation {
     <#
     .SYNOPSIS
         Gets permutations of an IP address expansion expression.
+
     .DESCRIPTION
         Gets permutations of an IP address expansion expression.
     #>
