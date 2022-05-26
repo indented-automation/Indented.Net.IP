@@ -2,14 +2,19 @@ function Get-NetworkSummary {
     <#
     .SYNOPSIS
         Generates a summary describing several properties of a network range
+
     .DESCRIPTION
         Get-NetworkSummary uses many of the IP conversion commands to provide a summary of a network range from any IP address in the range and a subnet mask.
+
     .INPUTS
         System.String
+
     .EXAMPLE
         Get-NetworkSummary 192.168.0.1 255.255.255.0
+
     .EXAMPLE
         Get-NetworkSummary 10.0.9.43/22
+
     .EXAMPLE
         Get-NetworkSummary 0/0
     #>
@@ -19,16 +24,16 @@ function Get-NetworkSummary {
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [String]$IPAddress,
+        [string]$IPAddress,
 
         # A subnet mask as an IP address.
         [Parameter(Position = 2)]
-        [String]$SubnetMask
+        [string]$SubnetMask
     )
 
     process {
         try {
-            $network = ConvertToNetwork @psboundparameters
+            $network = ConvertToNetwork @PSBoundParameters
         } catch {
             throw $_
         }
@@ -66,14 +71,14 @@ function Get-NetworkSummary {
         }
 
         $networkSummary.Class = switch -regex (ConvertTo-BinaryIP $network.IPAddress) {
-            '^1111'               { 'E'; break }
-            '^1110'               { 'D'; break }
+            '^1111' { 'E'; break }
+            '^1110' { 'D'; break }
             '^11000000\.10101000' { if ($networkSummary.MaskLength -ge 16) { $networkSummary.IsPrivate = $true } }
-            '^110'                { 'C'; break }
-            '^10101100\.0001'     { if ($networkSummary.MaskLength -ge 12) { $networkSummary.IsPrivate = $true } }
-            '^10'                 { 'B'; break }
-            '^00001010'           { if ($networkSummary.MaskLength -ge 8) { $networkSummary.IsPrivate = $true} }
-            '^0'                  { 'A'; break }
+            '^110' { 'C'; break }
+            '^10101100\.0001' { if ($networkSummary.MaskLength -ge 12) { $networkSummary.IsPrivate = $true } }
+            '^10' { 'B'; break }
+            '^00001010' { if ($networkSummary.MaskLength -ge 8) { $networkSummary.IsPrivate = $true } }
+            '^0' { 'A'; break }
         }
 
         $networkSummary

@@ -32,20 +32,29 @@ ConvertTo-Subnet attempts to convert a starting and ending IP address from a ran
 ConvertTo-Subnet -Start 0.0.0.0 -End 255.255.255.255
 ```
 
+Returns a subnet object describing 0.0.0.0/0.
+
 ### EXAMPLE 2
 ```
 ConvertTo-Subnet -Start 192.168.0.1 -End 192.168.0.129
 ```
+
+Returns a subnet object describing 192.168.0.0/24.
+The smallest subnet which can encapsulate the start and end range.
 
 ### EXAMPLE 3
 ```
 ConvertTo-Subnet 10.0.0.23/24
 ```
 
+Returns a subnet object describing 10.0.0.0/24.
+
 ### EXAMPLE 4
 ```
 ConvertTo-Subnet 10.0.0.23 255.255.255.0
 ```
+
+Returns a subnet object describing 10.0.0.0/24.
 
 ## PARAMETERS
 

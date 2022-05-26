@@ -8,30 +8,29 @@
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
+          <TableColumnHeader />
           <TableColumnHeader>
-            <Label>NetworkAddress</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>BroadcastAddress</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>SubnetMask</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>MaskLength</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>HostAddresses</Label>
             <Alignment>left</Alignment>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Cidr</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkAddress</PropertyName>
               </TableColumnItem>

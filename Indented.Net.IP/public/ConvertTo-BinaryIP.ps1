@@ -2,10 +2,13 @@ function ConvertTo-BinaryIP {
     <#
     .SYNOPSIS
         Converts a Decimal IP address into a binary format.
+
     .DESCRIPTION
         ConvertTo-BinaryIP uses System.Convert to switch between decimal and binary format. The output from this function is dotted binary.
+
     .INPUTS
         System.Net.IPAddress
+
     .EXAMPLE
         ConvertTo-BinaryIP 1.2.3.4
 
