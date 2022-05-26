@@ -18,8 +18,12 @@
           <TableColumnHeader>
             <Alignment>left</Alignment>
           </TableColumnHeader>
-          <TableColumnHeader />
-          <TableColumnHeader />
+          <TableColumnHeader>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Alignment>right</Alignment>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
