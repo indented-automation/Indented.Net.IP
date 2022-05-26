@@ -99,6 +99,7 @@ function Get-Subnet {
         do {
             $maximumHostBits--
         } until (($range['Start'] -band ([UInt32]1 -shl $maximumHostBits)) -ne ($range['End'] -band ([UInt32]1 -shl $maximumHostBits)))
+        $maximumHostBits++
 
         # Guards against infinite loops when I've done something wrong
         $maximumIterations = 200
