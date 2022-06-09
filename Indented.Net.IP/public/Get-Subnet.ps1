@@ -74,7 +74,7 @@ function Get-Subnet {
         for ($i = 0; $i -lt $numberOfNets; $i++) {
             $networkAddress = ConvertTo-DottedDecimalIP $decimalAddress
 
-            NewSubnet -NetworkAddress $networkAddress -SubnetMask $newNetwork.MaskLength
+            NewSubnet -NetworkAddress $networkAddress -MaskLength $newNetwork.MaskLength
 
             $decimalAddress += $numberOfAddresses
         }
