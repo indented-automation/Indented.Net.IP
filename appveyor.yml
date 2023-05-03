@@ -34,7 +34,7 @@ test_script:
 
 on_success:
   - ps: |
-      $tagVersion = (git describe --tags --abbrev=0 2>$null) -replace "^v" -as [Version]
+      $tagVersion = (git describe --tags --abbrev=0 2>$null) -replace '^v' -as [Version]
 
       $shouldPublish = $env:APPVEYOR_REPO_BRANCH -in 'master', 'main' -and
           $tagVersion -and

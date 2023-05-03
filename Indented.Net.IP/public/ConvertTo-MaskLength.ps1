@@ -20,8 +20,9 @@ function ConvertTo-MaskLength {
     param (
         # A subnet mask to convert into length.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [Alias("Mask")]
-        [IPAddress]$SubnetMask
+        [Alias('Mask')]
+        [IPAddress]
+        $SubnetMask
     )
 
     process {

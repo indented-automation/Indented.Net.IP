@@ -16,11 +16,12 @@ function ConvertTo-BinaryIP {
     #>
 
     [CmdletBinding()]
-    [OutputType([String])]
+    [OutputType([string])]
     param (
         # An IP Address to convert.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [IPAddress]$IPAddress
+        [IPAddress]
+        $IPAddress
     )
 
     process {
