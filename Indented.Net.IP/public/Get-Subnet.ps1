@@ -24,6 +24,7 @@ function Get-Subnet {
         Get the largest possible subnets between the start and end address.
     #>
 
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSPossibleIncorrectUsageOfAssignmentOperator', '')]
     [CmdletBinding(DefaultParameterSetName = 'FromSupernet')]
     [OutputType('Indented.Net.IP.Subnet')]
     param (
