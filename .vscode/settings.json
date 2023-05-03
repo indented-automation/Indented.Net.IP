@@ -1,0 +1,37 @@
+{
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.renderFinalNewline": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "powershell.codeFormatting.addWhitespaceAroundPipe": true,
+    "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+    "powershell.codeFormatting.whitespaceAfterSeparator": true,
+    "powershell.codeFormatting.whitespaceAroundOperator": true,
+    "powershell.codeFormatting.whitespaceBeforeOpenBrace": true,
+    "powershell.codeFormatting.whitespaceBeforeOpenParen": true,
+    "powershell.codeFormatting.whitespaceInsideBrace": true,
+    "powershell.scriptAnalysis.settingsPath": "PSScriptAnalyzerSettings.psd1",
+    "vsicons.associations.folders": [
+        {
+            "extends": "tests",
+            "extensions": [
+                "tests"
+            ],
+            "format": "svg",
+            "icon": "test"
+        }
+    ],
+    "vsicons.associations.files": [
+        {
+            "extends": "tests",
+            "extensions": [
+                "tests.ps1"
+            ],
+            "format": "svg",
+            "icon": "test"
+        }
+    ],
+    "workbench.iconTheme": "vscode-icons"
+}

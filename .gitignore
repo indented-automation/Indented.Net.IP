@@ -46,9 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# VSCode
-.vscode
-
 # Build
 /build
 /output
