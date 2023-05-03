@@ -20,7 +20,8 @@ function ConvertTo-DecimalIP {
     param (
         # An IP Address to convert.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline )]
-        [IPAddress]$IPAddress
+        [IPAddress]
+        $IPAddress
     )
 
     process {

@@ -22,7 +22,8 @@ function Resolve-IPAddress {
     param (
         # The IPAddress expression to resolve.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline)]
-        [string]$IPAddress
+        [string]
+        $IPAddress
     )
 
     process {

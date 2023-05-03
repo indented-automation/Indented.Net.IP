@@ -25,23 +25,28 @@ function Get-NetworkRange {
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
         [Parameter(Mandatory, Position = 1, ValueFromPipeline, ParameterSetName = 'FromIPAndMask')]
-        [string]$IPAddress,
+        [string]
+        $IPAddress,
 
         # A subnet mask as an IP address.
         [Parameter(Position = 2, ParameterSetName = 'FromIPAndMask')]
-        [string]$SubnetMask,
+        [string]
+        $SubnetMask,
 
         # Include the network and broadcast addresses when generating a network address range.
         [Parameter(ParameterSetName = 'FromIPAndMask')]
-        [switch]$IncludeNetworkAndBroadcast,
+        [switch]
+        $IncludeNetworkAndBroadcast,
 
         # The start address of a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
-        [IPAddress]$Start,
+        [IPAddress]
+        $Start,
 
         # The end address of a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
-        [IPAddress]$End
+        [IPAddress]
+        $End
     )
 
     process {

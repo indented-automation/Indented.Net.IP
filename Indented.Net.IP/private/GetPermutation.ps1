@@ -10,11 +10,14 @@ function GetPermutation {
     [CmdletBinding()]
     param (
         [PSTypeName('ExpansionGroupInfo')]
-        [Object[]]$Group,
+        [object[]]
+        $Group,
 
-        [String]$BaseAddress,
+        [string]
+        $BaseAddress,
 
-        [Int32]$Index
+        [int]
+        $Index
     )
 
     foreach ($value in $Group[$Index].ReplaceWith) {

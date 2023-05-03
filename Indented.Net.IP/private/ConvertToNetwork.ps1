@@ -2,37 +2,36 @@ function ConvertToNetwork {
     <#
     .SYNOPSIS
         Converts IP address formats to a set a known styles.
+
     .DESCRIPTION
         ConvertToNetwork ensures consistent values are recorded from parameters which must handle differing addressing formats. This Cmdlet allows all other the other functions in this module to offload parameter handling.
-    .NOTES
-        Change log:
-            05/03/2016 - Chris Dent - Refactored and simplified.
-            14/01/2014 - Chris Dent - Created.
     #>
 
     [CmdletBinding()]
     [OutputType('Indented.Net.IP.Network')]
     param (
         # Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
-        [Parameter(Mandatory = $true, Position = 1)]
-        [String]$IPAddress,
+        [Parameter(Mandatory, Position = 1)]
+        [string]
+        $IPAddress,
 
         # A subnet mask as an IP address.
         [Parameter(Position = 2)]
         [AllowNull()]
-        [String]$SubnetMask
+        [string]
+        $SubnetMask
     )
 
     $validSubnetMaskValues = @(
-        "0.0.0.0", "128.0.0.0", "192.0.0.0",
-        "224.0.0.0", "240.0.0.0", "248.0.0.0", "252.0.0.0",
-        "254.0.0.0", "255.0.0.0", "255.128.0.0", "255.192.0.0",
-        "255.224.0.0", "255.240.0.0", "255.248.0.0", "255.252.0.0",
-        "255.254.0.0", "255.255.0.0", "255.255.128.0", "255.255.192.0",
-        "255.255.224.0", "255.255.240.0", "255.255.248.0", "255.255.252.0",
-        "255.255.254.0", "255.255.255.0", "255.255.255.128", "255.255.255.192",
-        "255.255.255.224", "255.255.255.240", "255.255.255.248", "255.255.255.252",
-        "255.255.255.254", "255.255.255.255"
+        '0.0.0.0', '128.0.0.0', '192.0.0.0',
+        '224.0.0.0', '240.0.0.0', '248.0.0.0', '252.0.0.0',
+        '254.0.0.0', '255.0.0.0', '255.128.0.0', '255.192.0.0',
+        '255.224.0.0', '255.240.0.0', '255.248.0.0', '255.252.0.0',
+        '255.254.0.0', '255.255.0.0', '255.255.128.0', '255.255.192.0',
+        '255.255.224.0', '255.255.240.0', '255.255.248.0', '255.255.252.0',
+        '255.255.254.0', '255.255.255.0', '255.255.255.128', '255.255.255.192',
+        '255.255.255.224', '255.255.255.240', '255.255.255.248', '255.255.255.252',
+        '255.255.255.254', '255.255.255.255'
     )
 
     $network = [PSCustomObject]@{

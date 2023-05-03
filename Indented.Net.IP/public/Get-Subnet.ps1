@@ -24,28 +24,34 @@ function Get-Subnet {
         Get the largest possible subnets between the start and end address.
     #>
 
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSPossibleIncorrectUsageOfAssignmentOperator', '')]
     [CmdletBinding(DefaultParameterSetName = 'FromSupernet')]
     [OutputType('Indented.Net.IP.Subnet')]
     param (
         # Any address in the super-net range. Either a literal IP address, a network range expressed as CIDR notation, or an IP address and subnet mask in a string.
         [Parameter(Mandatory, Position = 1, ParameterSetName = 'FromSupernet')]
-        [string]$IPAddress,
+        [string]
+        $IPAddress,
 
         # The subnet mask of the network to split. Mandatory if the subnet mask is not included in the IPAddress parameter.
         [Parameter(Position = 2, ParameterSetName = 'FromSupernet')]
-        [string]$SubnetMask,
+        [string]
+        $SubnetMask,
 
         # Split the existing network described by the IPAddress and subnet mask using this mask.
         [Parameter(Mandatory, ParameterSetName = 'FromSupernet')]
-        [string]$NewSubnetMask,
+        [string]
+        $NewSubnetMask,
 
         # The first IP address from a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
-        [IPAddress]$Start,
+        [IPAddress]
+        $Start,
 
         # The last IP address from a range.
         [Parameter(Mandatory, ParameterSetName = 'FromStartAndEnd')]
-        [IPAddress]$End
+        [IPAddress]
+        $End
     )
 
     if ($PSCmdlet.ParameterSetName -eq 'FromSupernet') {

@@ -1,6 +1,6 @@
 Describe PSScriptAnalyzer {
     BeforeDiscovery {
-        $moduleRoot = $PSScriptRoot.Substring(0, $PSScriptRoot.IndexOf('\tests'))
+        $moduleRoot = $PSScriptRoot.Substring(0, $PSScriptRoot.IndexOf('{0}tests' -f [System.IO.Path]::DirectorySeparatorChar))
         $projectRoot = $moduleRoot | Split-Path -Parent
         $settings = Join-Path $projectRoot -ChildPath 'PSScriptAnalyzerSettings.psd1'
 
@@ -13,7 +13,7 @@ Describe PSScriptAnalyzer {
                 @{
                     Rule = [PSCustomObject]@{
                         RuleName   = $_.RuleName
-                        Message    = $_.Message -replace '(.{50,90}) ', "`n        `$1" -replace '^\n        '
+                        Message    = $_.Message -replace '(.{1,100})(?:\s|$)', "`n        `$1" -replace '^\n        '
                         ScriptName = $_.ScriptName
                         Line       = $_.Line
                         ScriptPath = $_.ScriptPath
