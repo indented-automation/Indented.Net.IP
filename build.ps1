@@ -24,9 +24,6 @@ function Build {
     Build-Module -Path (Resolve-Path $PSScriptRoot\*\build.psd1) -Verbose
 
     $rootModule = Join-Path -Path $PSScriptRoot -ChildPath 'build\*\*\*.psm1' | Resolve-Path
-
-    Get-Content $rootModule | Write-Host
-
     $tokens = $errors = $null
     $ast = [System.Management.Automation.Language.Parser]::ParseFile(
         $rootModule,
