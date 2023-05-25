@@ -24,6 +24,9 @@ function Build {
     Build-Module -Path (Resolve-Path $PSScriptRoot\*\build.psd1)
 
     $rootModule = Join-Path -Path $PSScriptRoot -ChildPath 'build\*\*\*.psm1' | Resolve-Path
+
+    Get-Content $rootModule | Write-Host
+
     $tokens = $errors = $null
     $ast = [System.Management.Automation.Language.Parser]::ParseFile(
         $rootModule,
@@ -48,8 +51,6 @@ function Build {
 
         Update-Metadata -Path $moduleManifest.FullName -PropertyName DscResourcesToExport -Value $dscResourcesToExport
     }
-
-    $rootModule | Write-Host
 }
 
 function Test {
