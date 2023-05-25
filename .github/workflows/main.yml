@@ -23,6 +23,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Setup (pwsh)
+        if: github.event.pull_request.base.ref == 'main'
+        shell: pwsh
+        run: .\build.ps1 -TaskName Setup
+
+      - name: Setup (winps)
+        if: github.event.pull_request.base.ref == 'main' && runner.os == 'Windows'
+        shell: powershell
+        run: .\build.ps1 -TaskName Setup
+
       - name: Build
         shell: pwsh
         run: .\build.ps1 -TaskName Clean, Build
@@ -33,7 +43,7 @@ jobs:
         run: .\build.ps1 -TaskName Test
 
       - name: Unit test (winps)
-        if: runner.os == 'Windows' && github.event.pull_request.base.ref == 'main'
+        if: github.event.pull_request.base.ref == 'main' && runner.os == 'Windows'
         shell: powershell
         run: .\build.ps1 -TaskName Test
 
