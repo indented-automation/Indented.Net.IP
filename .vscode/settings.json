@@ -1,7 +1,7 @@
 {
     "diffEditor.ignoreTrimWhitespace": true,
     "editor.trimAutoWhitespace": true,
-    "editor.renderFinalNewline": false,
+    "editor.renderFinalNewline": "off",
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,

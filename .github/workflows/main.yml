@@ -1,0 +1,51 @@
+name: Indented PowerShell module
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup (pwsh)
+        if: github.event.pull_request.base.ref == 'main'
+        shell: pwsh
+        run: .\build.ps1 -TaskName Setup
+
+      - name: Setup (winps)
+        if: github.event.pull_request.base.ref == 'main' && runner.os == 'Windows'
+        shell: powershell
+        run: .\build.ps1 -TaskName Setup
+
+      - name: Build
+        shell: pwsh
+        run: .\build.ps1 -TaskName Clean, Build
+
+      - name: Unit test (pwsh)
+        if: github.event.pull_request.base.ref == 'main'
+        shell: pwsh
+        run: .\build.ps1 -TaskName Test
+
+      - name: Unit test (winps)
+        if: github.event.pull_request.base.ref == 'main' && runner.os == 'Windows'
+        shell: powershell
+        run: .\build.ps1 -TaskName Test
+
+      - name: Publish Test Report
+        if: github.event.pull_request.base.ref == 'main' && always()
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: '**/build/junit-*.xml'
