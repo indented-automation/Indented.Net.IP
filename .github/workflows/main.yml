@@ -13,10 +13,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
 
-    concurrency:
-      group: ${{ github.ref }}
-      cancel-in-progress: true
-
     steps:
       - uses: actions/checkout@v3
         with:
