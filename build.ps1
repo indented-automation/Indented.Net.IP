@@ -65,7 +65,7 @@ function Test {
             }
         }
 
-        Import-Module -Name $modulePath -Force -Global
+        $moduleInfo = Import-Module -Name $modulePath -Force -Global -PassThru
 
         $configuration = @{
             Run          = @{
@@ -78,8 +78,9 @@ function Test {
                 OutputPath = Join-Path -Path $PSScriptRoot -ChildPath 'build\codecoverage.xml'
             }
             TestResult   = @{
-                Enabled    = $true
-                OutputPath = Join-Path -Path $PSScriptRoot -ChildPath 'build\nunit.xml'
+                Enabled      = $true
+                OutputPath   = Join-Path -Path $PSScriptRoot -ChildPath ('build\junit-{0}.xml' -f $moduleInfo.Name)
+                OutputFormat = 'JUnitXml'
             }
             Output       = @{
                 Verbosity = 'Detailed'
