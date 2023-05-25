@@ -48,6 +48,8 @@ function Build {
 
         Update-Metadata -Path $moduleManifest.FullName -PropertyName DscResourcesToExport -Value $dscResourcesToExport
     }
+
+    $rootModule | Write-Host
 }
 
 function Test {
