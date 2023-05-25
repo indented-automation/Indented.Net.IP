@@ -46,3 +46,5 @@ jobs:
       - name: Publish Test Report
         if: github.event.pull_request.base.ref == 'main' && always()
         uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: '**/build/junit-*.xml'
