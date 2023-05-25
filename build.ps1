@@ -21,7 +21,7 @@ function Clean {
 }
 
 function Build {
-    Build-Module -Path (Resolve-Path $PSScriptRoot\*\build.psd1)
+    Build-Module -Path (Resolve-Path $PSScriptRoot\*\build.psd1) -Verbose
 
     $rootModule = Join-Path -Path $PSScriptRoot -ChildPath 'build\*\*\*.psm1' | Resolve-Path
 
